@@ -2,9 +2,8 @@ extends CharacterBody2D
 
 var speed = 799
 var motion = Vector2()
-#@onready var animated_Sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-const SPRITE_WIDTH = 400.0  # Замените 32.0 на нужное значение
+const SPRITE_WIDTH = 400.0  #костыль
 
 func _process(delta):
 	motion = Vector2()  
