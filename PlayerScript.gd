@@ -26,11 +26,9 @@ func _process(delta):
 		
 		var view = get_viewport_rect().size 
 		var camera_position = camera.global_position
-		
-		var sprite_half = sprite_2d.texture.get_width() / 12
-		#problem with understanding how to restrict player x pos to gamescene bounds
+		var sprite_half = (sprite_2d.texture.get_width() * get_parent().scale.x) / 2
+		print(get_parent().scale.x)
 		var left_bound = camera_position.x + sprite_half
-		var right_bound = view.x - sprite_half #+ camera_position.x  
-		print(sprite_half)
+		var right_bound = view.x - sprite_half
 		global_position.x = clamp(global_position.x, left_bound, right_bound)
 
