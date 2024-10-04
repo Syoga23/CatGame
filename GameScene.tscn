@@ -1,15 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwi0kxnjh6pwu"]
+[gd_scene load_steps=5 format=3 uid="uid://bwi0kxnjh6pwu"]
 
 [ext_resource type="PackedScene" uid="uid://dxjr13t76wfnf" path="res://PlayerScene.tscn" id="1_eq26r"]
 [ext_resource type="Script" path="res://GameScene.gd" id="1_tdykh"]
+[ext_resource type="Script" path="res://CanvasLayer.gd" id="3_c8f3j"]
+[ext_resource type="PackedScene" uid="uid://d18hgremxjab5" path="res://foods.tscn" id="3_np4vu"]
 
-[node name="Node2D" type="Node2D"]
+[node name="GameScene" type="Node2D"]
 script = ExtResource("1_tdykh")
+food_scene = ExtResource("3_np4vu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("3_c8f3j")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = -58.0
+offset_top = -50.0
+offset_right = -18.0
+offset_bottom = -10.0
 
 [node name="Player" parent="." instance=ExtResource("1_eq26r")]
-position = Vector2(582, 559)
-scale = Vector2(0.5, 0.5)
+position = Vector2(431, 886)
+scale = Vector2(0.25, 0.25)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2(0.8, 2)
 anchor_mode = 0
+
+[node name="Food" parent="." instance=ExtResource("3_np4vu")]
+position = Vector2(-134, 1339)

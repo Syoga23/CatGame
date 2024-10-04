@@ -15,6 +15,14 @@ run/main_scene="res://GameScene.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.png"
 
+[display]
+
+window/size/viewport_width=850
+window/size/viewport_height=1000
+window/stretch/mode="viewport"
+window/stretch/aspect="ignore"
+window/handheld/orientation=1
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
