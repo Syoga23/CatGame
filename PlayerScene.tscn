@@ -24,15 +24,15 @@ animations = [{
 script = ExtResource("1_6fam5")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlayerArea2D"]
-position = Vector2(-2.91235, 23.818)
-scale = Vector2(1.9955, 2.41559)
-polygon = PackedVector2Array(-83, -116, -175, -3, -173, 179, 184, 180, 214, -15, 84, -131)
+position = Vector2(-2.91235, 19.3103)
+scale = Vector2(1.9955, 2.3955)
+polygon = PackedVector2Array(-83, -116, -175, -3, -178.946, 179.791, 181.865, 180.209, 214, -15, 84, -131)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerArea2D"]
 sprite_frames = SubResource("SpriteFrames_1yseq")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.482964
+frame_progress = 0.336115
 
 [node name="PlayerBasis" type="Sprite2D" parent="PlayerArea2D"]
 visible = false
