@@ -13,10 +13,6 @@ func _process(delta):
 	spawn_timer += delta
 	if spawn_timer >= SPAWN_INTERVAL:
 		spawn_food()
-		spawn_food()
-		spawn_food()
-		spawn_food()
-		spawn_food()
 		spawn_timer = 0.0
 
 func spawn_food():
@@ -24,7 +20,7 @@ func spawn_food():
 	if camera:
 		var camera_position = camera.position
 		var viewport_size = get_viewport().size
-		
+
 		#add something(food_sprite width for example) to keep food spawning in right places
 		var x_position = randf_range(camera_position.x, viewport_size.x)
 		var food_instance = food_scene.instantiate() 

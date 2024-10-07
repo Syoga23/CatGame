@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d04m55u6mjl6l"
-path="res://.godot/imported/CatClose.png-03b23e94daf046aa4aa7bfbc62d71b7e.ctex"
+uid="uid://0321u52g8d4w"
+path="res://.godot/imported/high.png-bbecbc81dca274c8d46c615332491267.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/Player/CatClose.png"
-dest_files=["res://.godot/imported/CatClose.png-03b23e94daf046aa4aa7bfbc62d71b7e.ctex"]
+source_file="res://textures/food/Healthy/high.png"
+dest_files=["res://.godot/imported/high.png-bbecbc81dca274c8d46c615332491267.ctex"]
 
 [params]
 

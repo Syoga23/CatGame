@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5ammuotun6g5"
-path="res://.godot/imported/medium.png-3a1572ca1ee3489c34370d19058acfc2.ctex"
+uid="uid://dm6avgf1dq0x0"
+path="res://.godot/imported/health.png-e6b39d8c622183ac97060704964a388b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/Food/Healthy/medium.png"
-dest_files=["res://.godot/imported/medium.png-3a1572ca1ee3489c34370d19058acfc2.ctex"]
+source_file="res://textures/healthbar/health.png"
+dest_files=["res://.godot/imported/health.png-e6b39d8c622183ac97060704964a388b.ctex"]
 
 [params]
 

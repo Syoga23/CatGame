@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxjr13t76wfnf"]
+
+[ext_resource type="Script" path="res://scripts/PlayerScript.gd" id="1_6fam5"]
+[ext_resource type="Texture2D" uid="uid://d04m55u6mjl6l" path="res://textures/player/CatClose.png" id="2_fpyjt"]
+[ext_resource type="Texture2D" uid="uid://hmiu2ca8qbqx" path="res://textures/player/CatOpen.png" id="3_y0ann"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1yseq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fpyjt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_y0ann")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pjv5u"]
+radius = 132.0
+height = 364.0
+
+[node name="Player" type="Node2D"]
+
+[node name="PlayerArea2D" type="Area2D" parent="." groups=["player"]]
+script = ExtResource("1_6fam5")
+Speed = 200
+HealthPoints = 100
+hunger_decrease_rate = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerArea2D"]
+sprite_frames = SubResource("SpriteFrames_1yseq")
+animation = &"Idle"
+autoplay = "Idle"
+frame = 1
+
+[node name="PlayerBasis" type="Sprite2D" parent="PlayerArea2D"]
+visible = false
+texture = ExtResource("2_fpyjt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea2D"]
+position = Vector2(113, 32)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_pjv5u")
+
+[node name="Timer" type="Timer" parent="PlayerArea2D"]
+
+[connection signal="area_entered" from="PlayerArea2D" to="PlayerArea2D" method="_on_area_entered"]
