@@ -1,0 +1,30 @@
+extends CanvasLayer
+
+@onready var Game_Over : AudioStreamPlayer = $GameOver  
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	self.hide()
+
+func _on_quit_menu_button_pressed():
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn") 
+
+func _on_play_again_button_pressed():
+	get_tree().paused = false
+	get_tree().reload_current_scene()
+
+func _on_leaders_button_pressed():
+	pass # Replace with function body.
+
+func on_game_over(score):
+	Game_Over.play()
+	get_tree().paused = true
+	print(score)
+	self.show()
+
+func _on_tree_entered():
+	EventBus.game_over.connect(on_game_over)
+
+func _on_tree_exiting():
+	EventBus.game_over.disconnect(on_game_over)

@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxjr13t76wfnf"]
+[gd_scene load_steps=8 format=3 uid="uid://dxjr13t76wfnf"]
 
 [ext_resource type="Script" path="res://scripts/PlayerScript.gd" id="1_6fam5"]
 [ext_resource type="Texture2D" uid="uid://d04m55u6mjl6l" path="res://textures/player/CatClose.png" id="2_fpyjt"]
 [ext_resource type="Texture2D" uid="uid://hmiu2ca8qbqx" path="res://textures/player/CatOpen.png" id="3_y0ann"]
+[ext_resource type="AudioStream" uid="uid://62vqdj8mnu8n" path="res://Audio/Sound/Damage.wav" id="4_2ve76"]
+[ext_resource type="AudioStream" uid="uid://bimxsmgjecsjo" path="res://Audio/Sound/Bite.wav" id="5_fc8r7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1yseq"]
 animations = [{
@@ -28,7 +30,7 @@ height = 364.0
 script = ExtResource("1_6fam5")
 Speed = 200
 HealthPoints = 100
-hunger_decrease_rate = 1
+hunger_decrease_rate = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerArea2D"]
 sprite_frames = SubResource("SpriteFrames_1yseq")
@@ -46,5 +48,14 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_pjv5u")
 
 [node name="Timer" type="Timer" parent="PlayerArea2D"]
+autostart = true
 
-[connection signal="area_entered" from="PlayerArea2D" to="PlayerArea2D" method="_on_area_entered"]
+[node name="HurtSound" type="AudioStreamPlayer" parent="PlayerArea2D"]
+stream = ExtResource("4_2ve76")
+bus = &"SFX"
+
+[node name="BiteSound" type="AudioStreamPlayer" parent="PlayerArea2D"]
+stream = ExtResource("5_fc8r7")
+bus = &"SFX"
+
+[connection signal="timeout" from="PlayerArea2D/Timer" to="PlayerArea2D" method="_on_timer_timeout"]

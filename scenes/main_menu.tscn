@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://gpwethnq6tms"]
+[gd_scene load_steps=3 format=3 uid="uid://gpwethnq6tms"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_m17h1"]
+[ext_resource type="AudioStream" uid="uid://crk3qki3jm4ol" path="res://Audio/Music/MainMenu.ogg" id="2_x6of4"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -47,6 +48,10 @@ text = "Settings"
 [node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Exit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_x6of4")
+autoplay = true
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

@@ -10,6 +10,7 @@ size = Vector2(16, 15)
 [node name="Steak" type="Node2D"]
 script = ExtResource("1_7bvng")
 nutrition_value = 5
+food_name = "steak"
 fall_speed = 350.0
 
 [node name="hitbox" type="Area2D" parent="." groups=["food"]]
@@ -22,4 +23,4 @@ shape = SubResource("RectangleShape2D_we7pu")
 [node name="Sprite2D" type="Sprite2D" parent="hitbox"]
 texture = ExtResource("2_kpye8")
 
-[connection signal="area_entered" from="hitbox" to="." method="food_entered_player"]
+[connection signal="area_entered" from="hitbox" to="." method="Eaten_By_Player"]

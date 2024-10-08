@@ -16,7 +16,7 @@ func _process(delta):
 		spawn_timer = 0.0
 
 func spawn_food():
-	var camera = get_tree().get_root().get_child(0).get_node("Camera2D")
+	var camera = get_tree().get_root().get_child(1).get_node("Camera2D")
 	if camera:
 		var camera_position = camera.position
 		var viewport_size = get_viewport().size

@@ -3,8 +3,11 @@ extends TextureProgressBar
 func _ready():
 	pass # Replace with function body.
 
-func _process(delta):
-	pass
-
-func _on_player_area_2d_health_changed(points):
+func on_hp_update(points): 
 	self.value = points
+
+func _on_tree_entered():
+	EventBus.health_changed.connect(on_hp_update)
+
+func _on_tree_exiting():
+	EventBus.health_changed.disconnect(on_hp_update)

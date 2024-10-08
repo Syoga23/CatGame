@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bwi0kxnjh6pwu"]
+[gd_scene load_steps=19 format=3 uid="uid://bwi0kxnjh6pwu"]
 
 [ext_resource type="Script" path="res://scripts/GameScene.gd" id="1_32jtk"]
 [ext_resource type="PackedScene" uid="uid://dlmg1biueiwe3" path="res://scenes/steak.tscn" id="2_0yifk"]
@@ -6,38 +6,63 @@
 [ext_resource type="Texture2D" uid="uid://da1sc4nemnabf" path="res://textures/healthbar/no health.png" id="4_emr8j"]
 [ext_resource type="Texture2D" uid="uid://btdsbdncsry2f" path="res://textures/healthbar/empty health bar.png" id="5_p12ae"]
 [ext_resource type="Texture2D" uid="uid://dm6avgf1dq0x0" path="res://textures/healthbar/health.png" id="6_rrvcr"]
-[ext_resource type="Script" path="res://scripts/PlayerScript.gd" id="7_mmjfp"]
-[ext_resource type="Texture2D" uid="uid://d04m55u6mjl6l" path="res://textures/player/CatClose.png" id="8_1f828"]
 [ext_resource type="Script" path="res://scripts/HealthBar.gd" id="8_fg4ht"]
-[ext_resource type="Texture2D" uid="uid://hmiu2ca8qbqx" path="res://textures/player/CatOpen.png" id="9_dyoub"]
+[ext_resource type="PackedScene" uid="uid://dxjr13t76wfnf" path="res://scenes/player.tscn" id="11_bwu4h"]
+[ext_resource type="StyleBox" uid="uid://dju7r87a5b675" path="res://styles/UI/buttons/new_style_box_flat.tres" id="11_nugke"]
+[ext_resource type="Script" path="res://scripts/GameOver_overlay.gd" id="11_pblkc"]
+[ext_resource type="AudioStream" uid="uid://b6cwahk0dpg1e" path="res://Audio/Sound/Game_Over.wav" id="12_sttpt"]
+[ext_resource type="AudioStream" uid="uid://bncvx00pnwki4" path="res://Audio/Music/Game.ogg" id="13_rnltm"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_1yseq"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("8_1f828")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_dyoub")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 5.0
-}]
+[sub_resource type="LabelSettings" id="LabelSettings_u2xba"]
+font_size = 60
+font_color = Color(1, 0, 0, 1)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pjv5u"]
-radius = 132.0
-height = 364.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frpqs"]
+bg_color = Color(0, 0, 0, 0.368627)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m37vv"]
+bg_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r5icm"]
+bg_color = Color(0.0807833, 0.0807834, 0.0807833, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xy3el"]
+bg_color = Color(0.180005, 0.180005, 0.180005, 1)
+
+[sub_resource type="Theme" id="Theme_yjr2f"]
+default_font_size = 0
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_disabled_color = Color(0.454524, 0.454524, 0.454524, 1)
+Button/colors/font_focus_color = Color(0.728393, 0.707584, 0.698625, 1)
+Button/colors/font_hover_color = Color(0.729412, 0.705882, 0.698039, 1)
+Button/colors/font_hover_pressed_color = Color(0.729412, 0.705882, 0.698039, 1)
+Button/colors/font_pressed_color = Color(0.906607, 0.897126, 0.893972, 1)
+Button/colors/icon_disabled_color = Color(0, 0, 0, 1)
+Button/colors/icon_focus_color = Color(0, 0, 0, 1)
+Button/colors/icon_hover_color = Color(0, 0, 0, 1)
+Button/colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/icon_normal_color = Color(0, 0, 0, 1)
+Button/colors/icon_pressed_color = Color(0, 0, 0, 1)
+Button/constants/h_separation = 0
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 16
+Button/fonts/font = null
+Button/styles/disabled = SubResource("StyleBoxFlat_frpqs")
+Button/styles/focus = SubResource("StyleBoxFlat_m37vv")
+Button/styles/hover = SubResource("StyleBoxFlat_r5icm")
+Button/styles/normal = ExtResource("11_nugke")
+Button/styles/pressed = SubResource("StyleBoxFlat_xy3el")
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_32jtk")
 food_scene = ExtResource("2_0yifk")
 metadata/_edit_horizontal_guides_ = [-161.0]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UICanvas" type="CanvasLayer" parent="."]
 script = ExtResource("3_ygwwl")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -48,7 +73,7 @@ grow_horizontal = 2
 scale = Vector2(3, 3)
 pivot_offset = Vector2(63.5, 0)
 
-[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer/VBoxContainer"]
+[node name="HealthBar" type="TextureProgressBar" parent="UICanvas/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 value = 100.0
@@ -61,38 +86,87 @@ script = ExtResource("8_fg4ht")
 anchor_mode = 0
 
 [node name="Steak" parent="." instance=ExtResource("2_0yifk")]
-position = Vector2(-61, 1064)
-nutrition_value = 5
-food_name = "steak"
+position = Vector2(-22, 1049)
 
-[node name="Player" type="Node2D" parent="."]
-position = Vector2(435, 887)
+[node name="GameOver_overlay" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("11_pblkc")
+
+[node name="Panel" type="Panel" parent="GameOver_overlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GameOver_overlay/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -228.5
+offset_top = -82.0
+offset_right = 228.5
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="VBoxText" type="VBoxContainer" parent="GameOver_overlay/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="GameOverButton" type="Label" parent="GameOver_overlay/Panel/MarginContainer/VBoxText"]
+layout_mode = 2
+text = "Игра окончена"
+label_settings = SubResource("LabelSettings_u2xba")
+horizontal_alignment = 1
+
+[node name="VBoxButtons" type="VBoxContainer" parent="GameOver_overlay/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="PlayAgainButton" type="Button" parent="GameOver_overlay/Panel/MarginContainer/VBoxButtons"]
+process_mode = 3
+layout_mode = 2
+theme = SubResource("Theme_yjr2f")
+text = "Играть заново"
+
+[node name="LeadersButton" type="Button" parent="GameOver_overlay/Panel/MarginContainer/VBoxButtons"]
+process_mode = 3
+layout_mode = 2
+theme = SubResource("Theme_yjr2f")
+text = "Таблица лидеров"
+
+[node name="QuitMenuButton" type="Button" parent="GameOver_overlay/Panel/MarginContainer/VBoxButtons"]
+process_mode = 3
+layout_mode = 2
+theme = SubResource("Theme_yjr2f")
+text = "Выйти в меню
+"
+
+[node name="GameOver" type="AudioStreamPlayer" parent="GameOver_overlay"]
+process_mode = 3
+stream = ExtResource("12_sttpt")
+bus = &"SFX"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_rnltm")
+autoplay = true
+bus = &"Music"
+
+[node name="Player" parent="." instance=ExtResource("11_bwu4h")]
+position = Vector2(411, 887)
 scale = Vector2(0.25, 0.25)
 
-[node name="PlayerArea2D" type="Area2D" parent="Player" groups=["player"]]
-script = ExtResource("7_mmjfp")
-Speed = 200
-HealthPoints = 100
-hunger_decrease_rate = 3
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player/PlayerArea2D"]
-sprite_frames = SubResource("SpriteFrames_1yseq")
-animation = &"Idle"
-autoplay = "Idle"
-frame = 1
-
-[node name="PlayerBasis" type="Sprite2D" parent="Player/PlayerArea2D"]
-visible = false
-texture = ExtResource("8_1f828")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PlayerArea2D"]
-position = Vector2(113, 32)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_pjv5u")
-
-[node name="Timer" type="Timer" parent="Player/PlayerArea2D"]
-autostart = true
-
-[connection signal="area_entered" from="Player/PlayerArea2D" to="Player/PlayerArea2D" method="_on_area_entered"]
-[connection signal="health_changed" from="Player/PlayerArea2D" to="CanvasLayer/VBoxContainer/HealthBar" method="_on_player_area_2d_health_changed"]
-[connection signal="timeout" from="Player/PlayerArea2D/Timer" to="Player/PlayerArea2D" method="_on_timer_timeout"]
+[connection signal="tree_entered" from="UICanvas/VBoxContainer/HealthBar" to="UICanvas/VBoxContainer/HealthBar" method="_on_tree_entered"]
+[connection signal="tree_exiting" from="UICanvas/VBoxContainer/HealthBar" to="UICanvas/VBoxContainer/HealthBar" method="_on_tree_exiting"]
+[connection signal="tree_entered" from="Steak" to="Steak" method="_on_tree_entered"]
+[connection signal="tree_exiting" from="Steak" to="Steak" method="_on_tree_exiting"]
+[connection signal="tree_entered" from="GameOver_overlay" to="GameOver_overlay" method="_on_tree_entered"]
+[connection signal="tree_exiting" from="GameOver_overlay" to="GameOver_overlay" method="_on_tree_exiting"]
+[connection signal="pressed" from="GameOver_overlay/Panel/MarginContainer/VBoxButtons/PlayAgainButton" to="GameOver_overlay" method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="GameOver_overlay/Panel/MarginContainer/VBoxButtons/LeadersButton" to="GameOver_overlay" method="_on_leaders_button_pressed"]
+[connection signal="pressed" from="GameOver_overlay/Panel/MarginContainer/VBoxButtons/QuitMenuButton" to="GameOver_overlay" method="_on_quit_menu_button_pressed"]
