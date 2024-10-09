@@ -5,6 +5,7 @@ var motion = Vector2()
 @onready var sprite_2d: Sprite2D = $PlayerBasis
 @onready var Hurt_Sound: AudioStreamPlayer = $HurtSound
 @onready var Bite_Sound: AudioStreamPlayer = $BiteSound
+
 @export var Speed : int
 @export var HealthPoints : int
 @export var hunger_decrease_rate: int
@@ -34,7 +35,8 @@ func _process(delta):
 
 	position += motion
 	
-	var camera = get_tree().get_root().get_child(1).get_node("Camera2D")
+	#\/\/\/CHANGE DIS PLEASE I BEG YOU USING NUMBERS HERE BAD VERY BAD\/\/\/
+	var camera = get_tree().get_root().get_child(2).get_node("Camera2D")
 
 	if camera:
 		

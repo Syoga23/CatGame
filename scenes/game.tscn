@@ -10,8 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://dxjr13t76wfnf" path="res://scenes/player.tscn" id="11_bwu4h"]
 [ext_resource type="StyleBox" uid="uid://dju7r87a5b675" path="res://styles/UI/buttons/new_style_box_flat.tres" id="11_nugke"]
 [ext_resource type="Script" path="res://scripts/GameOver_overlay.gd" id="11_pblkc"]
-[ext_resource type="AudioStream" uid="uid://b6cwahk0dpg1e" path="res://Audio/Sound/Game_Over.wav" id="12_sttpt"]
-[ext_resource type="AudioStream" uid="uid://bncvx00pnwki4" path="res://Audio/Music/Game.ogg" id="13_rnltm"]
+[ext_resource type="AudioStream" uid="uid://b6cwahk0dpg1e" path="res://audio/Sound/Game_Over.wav" id="12_sttpt"]
+[ext_resource type="AudioStream" uid="uid://bncvx00pnwki4" path="res://audio/Music/Game.ogg" id="13_rnltm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_u2xba"]
 font_size = 60
@@ -150,6 +150,7 @@ text = "Выйти в меню
 [node name="GameOver" type="AudioStreamPlayer" parent="GameOver_overlay"]
 process_mode = 3
 stream = ExtResource("12_sttpt")
+volume_db = -20.0
 bus = &"SFX"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]

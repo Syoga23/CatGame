@@ -7,7 +7,6 @@ const SPAWN_INTERVAL = 1.0
 func _ready():
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	spawn_timer += delta
@@ -16,7 +15,8 @@ func _process(delta):
 		spawn_timer = 0.0
 
 func spawn_food():
-	var camera = get_tree().get_root().get_child(1).get_node("Camera2D")
+	#\/\/\/CHANGE DIS PLEASE I BEG YOU USING NUMBERS HERE BAD VERY BAD\/\/\/
+	var camera = get_tree().get_root().get_child(2).get_node("Camera2D")
 	if camera:
 		var camera_position = camera.position
 		var viewport_size = get_viewport().size

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bimxsmgjecsjo"
-path="res://.godot/imported/Bite.wav-b3a13f20939f319dea01a4954d4243b0.sample"
+path="res://.godot/imported/Bite.wav-3029a9ad8b426aab7ed8d5f3ba9548d3.sample"
 
 [deps]
 
-source_file="res://Audio/Sound/Bite.wav"
-dest_files=["res://.godot/imported/Bite.wav-b3a13f20939f319dea01a4954d4243b0.sample"]
+source_file="res://audio/Sound/Bite.wav"
+dest_files=["res://.godot/imported/Bite.wav-3029a9ad8b426aab7ed8d5f3ba9548d3.sample"]
 
 [params]
 

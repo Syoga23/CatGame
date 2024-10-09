@@ -1,7 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://gpwethnq6tms"]
+[gd_scene load_steps=4 format=3 uid="uid://gpwethnq6tms"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_m17h1"]
-[ext_resource type="AudioStream" uid="uid://crk3qki3jm4ol" path="res://Audio/Music/MainMenu.ogg" id="2_x6of4"]
+[ext_resource type="AudioStream" uid="uid://crk3qki3jm4ol" path="res://audio/Music/MainMenu.ogg" id="2_x6of4"]
+
+[sub_resource type="GDScript" id="GDScript_kg676"]
+script/source = "extends MarginContainer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -25,9 +39,11 @@ offset_right = 164.5
 offset_bottom = 86.0
 grow_horizontal = 2
 grow_vertical = 2
+script = SubResource("GDScript_kg676")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -51,7 +67,10 @@ text = "Exit"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_x6of4")
+volume_db = -30.0
 autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scripts/PlayerScript.gd" id="1_6fam5"]
 [ext_resource type="Texture2D" uid="uid://d04m55u6mjl6l" path="res://textures/player/CatClose.png" id="2_fpyjt"]
 [ext_resource type="Texture2D" uid="uid://hmiu2ca8qbqx" path="res://textures/player/CatOpen.png" id="3_y0ann"]
-[ext_resource type="AudioStream" uid="uid://62vqdj8mnu8n" path="res://Audio/Sound/Damage.wav" id="4_2ve76"]
-[ext_resource type="AudioStream" uid="uid://bimxsmgjecsjo" path="res://Audio/Sound/Bite.wav" id="5_fc8r7"]
+[ext_resource type="AudioStream" uid="uid://62vqdj8mnu8n" path="res://audio/Sound/Damage.wav" id="4_2ve76"]
+[ext_resource type="AudioStream" uid="uid://bimxsmgjecsjo" path="res://audio/Sound/Bite.wav" id="5_fc8r7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1yseq"]
 animations = [{
@@ -56,6 +56,7 @@ bus = &"SFX"
 
 [node name="BiteSound" type="AudioStreamPlayer" parent="PlayerArea2D"]
 stream = ExtResource("5_fc8r7")
+volume_db = -20.0
 bus = &"SFX"
 
 [connection signal="timeout" from="PlayerArea2D/Timer" to="PlayerArea2D" method="_on_timer_timeout"]
