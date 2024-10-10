@@ -35,8 +35,8 @@ func _process(delta):
 
 	position += motion
 	
-	#\/\/\/CHANGE DIS PLEASE I BEG YOU USING NUMBERS HERE BAD VERY BAD\/\/\/
-	var camera = get_tree().get_root().get_child(2).get_node("Camera2D")
+	var root_count = get_tree().get_root().get_child_count() - 1
+	var camera = get_tree().get_root().get_child(root_count).get_node("Camera2D")
 
 	if camera:
 		

@@ -159,8 +159,8 @@ autoplay = true
 bus = &"Music"
 
 [node name="Player" parent="." instance=ExtResource("11_bwu4h")]
-position = Vector2(411, 887)
-scale = Vector2(0.25, 0.25)
+position = Vector2(414, 815)
+scale = Vector2(0.125, 0.125)
 
 [connection signal="tree_entered" from="UICanvas/VBoxContainer/HealthBar" to="UICanvas/VBoxContainer/HealthBar" method="_on_tree_entered"]
 [connection signal="tree_exiting" from="UICanvas/VBoxContainer/HealthBar" to="UICanvas/VBoxContainer/HealthBar" method="_on_tree_exiting"]

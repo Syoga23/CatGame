@@ -3,6 +3,7 @@ extends Node2D
 @export var food_scene: PackedScene
 var spawn_timer = 0.0
 const SPAWN_INTERVAL = 1.0
+const food_size = 2.5 
 
 func _ready():
 	pass # Replace with function body.
@@ -15,16 +16,16 @@ func _process(delta):
 		spawn_timer = 0.0
 
 func spawn_food():
-	#\/\/\/CHANGE DIS PLEASE I BEG YOU USING NUMBERS HERE BAD VERY BAD\/\/\/
-	var camera = get_tree().get_root().get_child(2).get_node("Camera2D")
+	var root_count = get_tree().get_root().get_child_count() - 1
+	var camera = get_tree().get_root().get_child(root_count).get_node("Camera2D")
 	if camera:
 		var camera_position = camera.position
 		var viewport_size = get_viewport().size
-
+		randomize()
 		#add something(food_sprite width for example) to keep food spawning in right places
 		var x_position = randf_range(camera_position.x, viewport_size.x)
 		var food_instance = food_scene.instantiate() 
 		food_instance.position = Vector2(x_position, camera_position.y)
-		food_instance.scale = Vector2(5, 5)
+		food_instance.scale = Vector2(food_size, food_size)
 		add_child(food_instance)
 		
