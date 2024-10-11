@@ -1,69 +1,207 @@
-[gd_scene load_steps=4 format=3 uid="uid://gpwethnq6tms"]
+[gd_scene load_steps=6 format=3 uid="uid://gpwethnq6tms"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_m17h1"]
 [ext_resource type="AudioStream" uid="uid://crk3qki3jm4ol" path="res://audio/Music/MainMenu.ogg" id="2_x6of4"]
 
-[sub_resource type="GDScript" id="GDScript_kg676"]
-script/source = "extends MarginContainer
+[sub_resource type="GDScript" id="GDScript_31kig"]
+script/source = "extends Control
 
+@onready var MASTER_BUS_ID = AudioServer.get_bus_index(\"Master\")
+@onready var MUSIC_BUS_ID = AudioServer.get_bus_index(\"Music\")
+@onready var SFX_BUS_ID = AudioServer.get_bus_index(\"SFX\")
 
-# Called when the node enters the scene tree for the first time.
+@onready var SFX_Slider : HSlider = %SFXSlider
+@onready var Music_Slider : HSlider = %MusicSlider
+@onready var Master_Slider : HSlider = %MasterSlider
+
 func _ready():
+	var audio_settings = ConfigFileHandler.load_audio_settings()
+	Music_Slider.value = min(audio_settings.Music, 1.0) * 100
+	SFX_Slider.value = min(audio_settings.SFX, 1.0) * 100
+	Master_Slider.value = min(audio_settings.Master, 1.0) * 100
+
+func _on_back_button_pressed():
+	self.visible = false
+
+func _on_save_button_pressed():
 	pass # Replace with function body.
 
+func _on_sfx_slider_value_changed(value):
+	AudioServer.set_bus_volume_db(SFX_BUS_ID, linear_to_db(value)) 
+	AudioServer.set_bus_mute(SFX_BUS_ID, value < .05)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _on_music_slider_value_changed(value):
+	AudioServer.set_bus_volume_db(MUSIC_BUS_ID, linear_to_db(value)) 
+	AudioServer.set_bus_mute(MUSIC_BUS_ID, value < .05)
+
+#CHANGE THIS IN FUTURE
+func _on_master_slider_value_changed(value):
+	AudioServer.set_bus_volume_db(MASTER_BUS_ID, linear_to_db(value)) 
+	AudioServer.set_bus_mute(MASTER_BUS_ID, value < .05)
+
+func _on_music_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_audio_settings(\"Music\", Music_Slider.value / 100)
+
+func _on_sfx_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_audio_settings(\"SFX\", SFX_Slider.value / 100)
+
+func _on_master_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_audio_settings(\"Master\", Master_Slider.value / 100)
 "
 
-[node name="MainMenu" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2s4bx"]
+bg_color = Color(0.225531, 0.633723, 0.907049, 1)
+
+[sub_resource type="Theme" id="Theme_7v3hj"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_2s4bx")
+
+[node name="MainMenu" type="CanvasLayer"]
+
+[node name="Menu" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource("1_m17h1")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="Menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -164.5
-offset_top = -86.0
-offset_right = 164.5
-offset_bottom = 86.0
+offset_left = 240.5
+offset_top = 382.5
+offset_right = 569.5
+offset_bottom = 577.5
 grow_horizontal = 2
 grow_vertical = 2
-script = SubResource("GDScript_kg676")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Play" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Play"
 
-[node name="LeaderBoard" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="LeaderBoard" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "LeaderBoard"
 
-[node name="Achievements" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Achievements" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Achievments"
 
-[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Settings" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Settings"
 
-[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Exit"
+
+[node name="Settings" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_31kig")
+
+[node name="PanelContainer" type="ColorRect" parent="Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_7v3hj")
+color = Color(0.266575, 0.266575, 0.266575, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Settings/PanelContainer"]
+layout_mode = 2
+offset_right = 850.0
+offset_bottom = 1000.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="GridContainer" type="GridContainer" parent="Settings/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 30
+columns = 2
+
+[node name="MasterLabel" type="Label" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Громкость игры:"
+
+[node name="MasterSlider" type="HSlider" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="MusicLabel" type="Label" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Громкость музыки:"
+
+[node name="MusicSlider" type="HSlider" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+ticks_on_borders = true
+
+[node name="SFXLabel" type="Label" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Громкость звуковых эффектов:"
+
+[node name="SFXSlider" type="HSlider" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+rounded = true
+
+[node name="SFXLabel2" type="Label" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Режим для фоточувствительных:"
+
+[node name="CheckBox" type="CheckBox" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="SFXLabel3" type="Label" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Тряска экрана:"
+
+[node name="CheckButton" type="CheckButton" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="BackButton" type="Button" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+text = "Назад"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_x6of4")
@@ -71,6 +209,13 @@ volume_db = -30.0
 autoplay = true
 bus = &"Music"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Play" to="Menu" method="_on_play_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Settings" to="Menu" method="_on_settings_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Exit" to="Menu" method="_on_exit_pressed"]
+[connection signal="drag_ended" from="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer/MasterSlider" to="Settings" method="_on_master_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer/MasterSlider" to="Settings" method="_on_master_slider_value_changed"]
+[connection signal="drag_ended" from="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="Settings" method="_on_music_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="Settings" method="_on_music_slider_value_changed"]
+[connection signal="drag_ended" from="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer/SFXSlider" to="Settings" method="_on_sfx_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer/SFXSlider" to="Settings" method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer/BackButton" to="Settings" method="_on_back_button_pressed"]

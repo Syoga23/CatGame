@@ -63,5 +63,4 @@ func _on_timer_timeout():
 	HealthPoints -= hunger_decrease_rate
 	HealthPoints = clamp(HealthPoints, 0, 100)  
 	EventBus.health_changed.emit(HealthPoints)
-	print(HealthPoints)
 

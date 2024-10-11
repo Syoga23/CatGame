@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 
 EventBus="*res://singletones/EventBus.gd"
 ConfigFileHandler="*res://singletones/ConfigFileHandler.gd"
+StaticData="*res://singletones/StaticData.gd"
 
 [display]
 

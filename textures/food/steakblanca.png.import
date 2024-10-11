@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cs202yriixbfn"
-path="res://.godot/imported/low.png-218c92f2931f271e0646b3a8b69b9440.ctex"
+uid="uid://bfju2nwek780d"
+path="res://.godot/imported/steakblanca.png-2397ca349f362790fdf8d5a745f5e8df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/food/Healthy/low.png"
-dest_files=["res://.godot/imported/low.png-218c92f2931f271e0646b3a8b69b9440.ctex"]
+source_file="res://textures/food/steakblanca.png"
+dest_files=["res://.godot/imported/steakblanca.png-2397ca349f362790fdf8d5a745f5e8df.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnyuglpc8qdrs"
-path="res://.godot/imported/Beer.png-a5e888edc0dee5c5303cd0c4bd9696d2.ctex"
+uid="uid://bcqorl7uysltk"
+path="res://.godot/imported/sushi.png-6fecb385e01f06c993a1e7633899461e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/food/Toxic/Beer.png"
-dest_files=["res://.godot/imported/Beer.png-a5e888edc0dee5c5303cd0c4bd9696d2.ctex"]
+source_file="res://textures/food/sushi.png"
+dest_files=["res://.godot/imported/sushi.png-6fecb385e01f06c993a1e7633899461e.ctex"]
 
 [params]
 

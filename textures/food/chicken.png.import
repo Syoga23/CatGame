@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3nritwq5mvvu"
-path="res://.godot/imported/Wine.png-c4a683d65e768bd63f7fe5f92ddb9037.ctex"
+uid="uid://1hsbb3m8niuu"
+path="res://.godot/imported/chicken.png-aad8d9ef0e4d2e7060f684cf97a2f3bb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/food/Toxic/Wine.png"
-dest_files=["res://.godot/imported/Wine.png-c4a683d65e768bd63f7fe5f92ddb9037.ctex"]
+source_file="res://textures/food/chicken.png"
+dest_files=["res://.godot/imported/chicken.png-aad8d9ef0e4d2e7060f684cf97a2f3bb.ctex"]
 
 [params]
 

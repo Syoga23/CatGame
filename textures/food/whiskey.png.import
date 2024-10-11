@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5ammuotun6g5"
-path="res://.godot/imported/medium.png-ce0a1976b67f492b98d88e88079b53d8.ctex"
+uid="uid://k6t056il50wm"
+path="res://.godot/imported/whiskey.png-271c7105c8992e2261ea650775c90a61.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/food/Healthy/medium.png"
-dest_files=["res://.godot/imported/medium.png-ce0a1976b67f492b98d88e88079b53d8.ctex"]
+source_file="res://textures/food/whiskey.png"
+dest_files=["res://.godot/imported/whiskey.png-271c7105c8992e2261ea650775c90a61.ctex"]
 
 [params]
 

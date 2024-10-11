@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0321u52g8d4w"
-path="res://.godot/imported/high.png-bbecbc81dca274c8d46c615332491267.ctex"
+uid="uid://bg3dj2a2amahm"
+path="res://.godot/imported/beer.png-30f6057f8840ccd2b8cbd6ff9efe7f6e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/food/Healthy/high.png"
-dest_files=["res://.godot/imported/high.png-bbecbc81dca274c8d46c615332491267.ctex"]
+source_file="res://textures/food/beer.png"
+dest_files=["res://.godot/imported/beer.png-30f6057f8840ccd2b8cbd6ff9efe7f6e.ctex"]
 
 [params]
 

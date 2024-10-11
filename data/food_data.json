@@ -1,0 +1,46 @@
+{
+  "foods": [
+    {
+      "id": 0,
+      "name": "beer",
+      "score": 0,
+      "saturation": -15,
+      "fall_speed": 300
+    },
+    {
+      "id": 1,
+      "name": "whiskey",
+      "score": 0,
+      "saturation": -666,
+      "fall_speed": 400
+    },
+    {
+      "id": 2,
+      "name": "wine",
+      "score": 0,
+      "saturation": -20,
+      "fall_speed": 350
+    },
+    {
+      "id": 3,
+      "name": "steakblanca",
+      "score": 30,
+      "saturation": 15,
+      "fall_speed": 250
+    },
+    {
+      "id": 4,
+      "name": "chicken",
+      "score": 15,
+      "saturation": 10,
+      "fall_speed": 175
+    },
+    {
+      "id": 5,
+      "name": "sushi",
+      "score": 5,
+      "saturation": 5,
+      "fall_speed": 150
+    }
+  ]
+}
