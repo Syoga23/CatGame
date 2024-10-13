@@ -1,7 +1,34 @@
-[gd_scene load_steps=6 format=3 uid="uid://gpwethnq6tms"]
+[gd_scene load_steps=18 format=3 uid="uid://gpwethnq6tms"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_m17h1"]
+[ext_resource type="Texture2D" uid="uid://cf6ly4wrfhe8d" path="res://textures/background/game.png" id="2_aoegp"]
+[ext_resource type="StyleBox" uid="uid://xusyg0pwk1b6" path="res://styles/UI/buttons/new_style_box_texture.tres" id="2_fysd3"]
 [ext_resource type="AudioStream" uid="uid://crk3qki3jm4ol" path="res://audio/Music/MainMenu.ogg" id="2_x6of4"]
+[ext_resource type="Texture2D" uid="uid://86cs141adb8p" path="res://textures/UI/buttons/button.png" id="3_4fbnm"]
+[ext_resource type="Texture2D" uid="uid://m8nl62we78fk" path="res://textures/game_scene_misc/windows.png" id="3_gsh1f"]
+[ext_resource type="Texture2D" uid="uid://m8vdtvrul6xq" path="res://textures/game_scene_misc/wall.png" id="4_wwgki"]
+[ext_resource type="FontFile" uid="uid://sl727btcgpio" path="res://fonts/ofont.ru_TatianaCTT.ttf" id="8_13axt"]
+[ext_resource type="PackedScene" uid="uid://dxjr13t76wfnf" path="res://scenes/player.tscn" id="8_62bxx"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5sper"]
+texture = ExtResource("3_4fbnm")
+
+[sub_resource type="Theme" id="Theme_7lvki"]
+default_font = ExtResource("8_13axt")
+default_font_size = 24
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/constants/outline_size = 3
+Button/fonts/font = ExtResource("8_13axt")
+Button/styles/hover = ExtResource("2_fysd3")
+Button/styles/normal = SubResource("StyleBoxTexture_5sper")
+Button/styles/pressed = ExtResource("2_fysd3")
+
+[sub_resource type="LabelSettings" id="LabelSettings_5rabc"]
+font = ExtResource("8_13axt")
+font_size = 100
+font_color = Color(0.788304, 0.43356, 0, 1)
+outline_size = 10
+outline_color = Color(0.642207, 0.350387, 3.85046e-07, 1)
 
 [sub_resource type="GDScript" id="GDScript_31kig"]
 script/source = "extends Control
@@ -14,30 +41,36 @@ script/source = "extends Control
 @onready var Music_Slider : HSlider = %MusicSlider
 @onready var Master_Slider : HSlider = %MasterSlider
 
+var limit_value = 0
+
 func _ready():
 	var audio_settings = ConfigFileHandler.load_audio_settings()
+	Master_Slider.value = min(audio_settings.Master, 1.0) * 100
+	limit_value = Master_Slider.value
 	Music_Slider.value = min(audio_settings.Music, 1.0) * 100
 	SFX_Slider.value = min(audio_settings.SFX, 1.0) * 100
-	Master_Slider.value = min(audio_settings.Master, 1.0) * 100
 
 func _on_back_button_pressed():
 	self.visible = false
 
-func _on_save_button_pressed():
-	pass # Replace with function body.
-
 func _on_sfx_slider_value_changed(value):
-	AudioServer.set_bus_volume_db(SFX_BUS_ID, linear_to_db(value)) 
-	AudioServer.set_bus_mute(SFX_BUS_ID, value < .05)
+	if value >= limit_value:
+		SFX_Slider.value = limit_value
+	else:
+		AudioServer.set_bus_volume_db(SFX_BUS_ID, linear_to_db(value)) 
+		AudioServer.set_bus_mute(SFX_BUS_ID, value < .05)
 
 func _on_music_slider_value_changed(value):
-	AudioServer.set_bus_volume_db(MUSIC_BUS_ID, linear_to_db(value)) 
-	AudioServer.set_bus_mute(MUSIC_BUS_ID, value < .05)
+	if value >= limit_value:
+		Music_Slider.value = limit_value
+	else:
+		AudioServer.set_bus_volume_db(MUSIC_BUS_ID, linear_to_db(value)) 
+		AudioServer.set_bus_mute(MUSIC_BUS_ID, value < .05)
 
-#CHANGE THIS IN FUTURE
 func _on_master_slider_value_changed(value):
-	AudioServer.set_bus_volume_db(MASTER_BUS_ID, linear_to_db(value)) 
-	AudioServer.set_bus_mute(MASTER_BUS_ID, value < .05)
+	Music_Slider.value = min(Music_Slider.value, value)
+	SFX_Slider.value = min(SFX_Slider.value, value)
+	limit_value = value
 
 func _on_music_slider_drag_ended(value_changed):
 	if value_changed:
@@ -58,14 +91,70 @@ bg_color = Color(0.225531, 0.633723, 0.907049, 1)
 [sub_resource type="Theme" id="Theme_7v3hj"]
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_2s4bx")
 
+[sub_resource type="LabelSettings" id="LabelSettings_fucco"]
+font = ExtResource("8_13axt")
+font_size = 19
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_gf12e"]
+default_font = ExtResource("8_13axt")
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/constants/outline_size = 3
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("8_13axt")
+Button/styles/hover = ExtResource("2_fysd3")
+Button/styles/normal = ExtResource("2_fysd3")
+Button/styles/pressed = ExtResource("2_fysd3")
+
 [node name="MainMenu" type="CanvasLayer"]
 
 [node name="Menu" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_m17h1")
+
+[node name="MarginContainer2" type="MarginContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="background" type="TextureRect" parent="Menu/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_aoegp")
+
+[node name="windows" type="TextureRect" parent="Menu/MarginContainer2/background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.96
+offset_top = -40.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+texture = ExtResource("3_gsh1f")
+flip_h = true
+
+[node name="wall" type="TextureRect" parent="Menu/MarginContainer2/background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.968
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+texture = ExtResource("4_wwgki")
 
 [node name="MarginContainer" type="MarginContainer" parent="Menu"]
 layout_mode = 1
@@ -74,36 +163,55 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 240.5
-offset_top = 382.5
-offset_right = 569.5
-offset_bottom = 577.5
+offset_left = -135.5
+offset_top = -96.5
+offset_right = 135.5
+offset_bottom = 96.5
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 20
 
 [node name="Play" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Play"
-
-[node name="LeaderBoard" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "LeaderBoard"
-
-[node name="Achievements" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Achievments"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("Theme_7lvki")
+text = "Играть"
 
 [node name="Settings" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Settings"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("Theme_7lvki")
+text = "Настройки"
 
 [node name="Exit" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Exit"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("Theme_7lvki")
+text = "Выйти"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 196.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 80
+
+[node name="GameName" type="Label" parent="MarginContainer"]
+layout_mode = 2
+text = "Meal for Cat"
+label_settings = SubResource("LabelSettings_5rabc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player" parent="." instance=ExtResource("8_62bxx")]
+position = Vector2(418, 765)
+scale = Vector2(0.125, 0.125)
 
 [node name="Settings" type="Control" parent="."]
 unique_name_in_owner = true
@@ -123,12 +231,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_7v3hj")
-color = Color(0.266575, 0.266575, 0.266575, 1)
+color = Color(0.885736, 0.708127, 0.534308, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="Settings/PanelContainer"]
-layout_mode = 2
-offset_right = 850.0
-offset_bottom = 1000.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -148,9 +259,12 @@ columns = 2
 [node name="MasterLabel" type="Label" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Громкость игры:"
+label_settings = SubResource("LabelSettings_fucco")
 
 [node name="MasterSlider" type="HSlider" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
+modulate = Color(0.976471, 0.639216, 0, 1)
+self_modulate = Color(0.976471, 0.639216, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -158,9 +272,12 @@ size_flags_vertical = 1
 [node name="MusicLabel" type="Label" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Громкость музыки:"
+label_settings = SubResource("LabelSettings_fucco")
 
 [node name="MusicSlider" type="HSlider" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
+modulate = Color(0.976471, 0.639216, 0, 1)
+self_modulate = Color(0.976471, 0.639216, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -169,38 +286,30 @@ ticks_on_borders = true
 [node name="SFXLabel" type="Label" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Громкость звуковых эффектов:"
+label_settings = SubResource("LabelSettings_fucco")
+autowrap_mode = 2
 
 [node name="SFXSlider" type="HSlider" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
+modulate = Color(0.975352, 0.639208, 7.70092e-07, 1)
+self_modulate = Color(0.976471, 0.639216, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 rounded = true
 
-[node name="SFXLabel2" type="Label" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Режим для фоточувствительных:"
-
-[node name="CheckBox" type="CheckBox" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-
-[node name="SFXLabel3" type="Label" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Тряска экрана:"
-
-[node name="CheckButton" type="CheckButton" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="BackButton" type="Button" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
+[node name="BackButton" type="Button" parent="Settings"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = -130.0
+offset_right = 366.0
+offset_bottom = -63.0
+grow_vertical = 0
 size_flags_vertical = 10
+theme = SubResource("Theme_gf12e")
 text = "Назад"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -208,6 +317,9 @@ stream = ExtResource("2_x6of4")
 volume_db = -30.0
 autoplay = true
 bus = &"Music"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
 
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Play" to="Menu" method="_on_play_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Settings" to="Menu" method="_on_settings_pressed"]
@@ -218,4 +330,4 @@ bus = &"Music"
 [connection signal="value_changed" from="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="Settings" method="_on_music_slider_value_changed"]
 [connection signal="drag_ended" from="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer/SFXSlider" to="Settings" method="_on_sfx_slider_drag_ended"]
 [connection signal="value_changed" from="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer/SFXSlider" to="Settings" method="_on_sfx_slider_value_changed"]
-[connection signal="pressed" from="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer/BackButton" to="Settings" method="_on_back_button_pressed"]
+[connection signal="pressed" from="Settings/BackButton" to="Settings" method="_on_back_button_pressed"]

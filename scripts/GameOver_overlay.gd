@@ -1,7 +1,8 @@
 extends CanvasLayer
 
-@onready var Game_Over : AudioStreamPlayer = $GameOver  
-
+@onready var Game_Over : AudioStreamPlayer = $GameOver
+@onready var Score : Label = %ScoreLabel
+@onready var Score_Death : Label = %ScoreLabel_Death
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.hide()
@@ -17,10 +18,11 @@ func _on_play_again_button_pressed():
 func _on_leaders_button_pressed():
 	pass # Replace with function body.
 
-func on_game_over(score):
+func on_game_over():
 	Game_Over.play()
+	Score.visible = false
+	Score_Death.text = Score.text 
 	get_tree().paused = true
-	print(score)
 	self.show()
 
 func _on_tree_entered():

@@ -9,6 +9,10 @@ food_size = 2.5
 food_scene = ExtResource("2_fbd7p")
 
 [node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 1.2
 autostart = true
 
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

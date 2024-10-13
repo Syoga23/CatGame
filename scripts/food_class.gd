@@ -11,7 +11,7 @@ var fall_speed: int
 
 func Eaten_By_Player(body):
 	if( body.is_in_group("player") ):
-		body.food_eaten(saturation)
+		body.food_eaten(saturation, score)
 		#emit score signal
 		await get_tree().create_timer(0.02).timeout
 		queue_free()

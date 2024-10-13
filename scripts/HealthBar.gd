@@ -1,8 +1,5 @@
 extends TextureProgressBar
 
-func _ready():
-	pass # Replace with function body.
-
 func on_hp_update(points): 
 	self.value = points
 
