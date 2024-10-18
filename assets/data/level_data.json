@@ -1,0 +1,91 @@
+{
+  "levels": [
+    {
+      "level": 0,
+      "name": "easy",
+      "locked": false,
+      "active": false,
+      "fall_speed_modifier": 0,
+      "timer_delay": 1200,
+      "food_count": 7,
+      "food_types": [
+        10,
+        11,
+        12,
+        3,
+        4
+      ],
+      "food_chance_modifier": 30
+    },
+    {
+      "level": 1,
+      "name": "medium",
+      "locked": false,
+      "active": false,
+      "fall_speed_modifier": 30,
+      "timer_delay": 1100,
+      "food_count": 6,
+      "food_types": [
+        10,
+        11,
+        12,
+        7,
+        8,
+        9,
+        3,
+        4,
+        2
+      ],
+      "food_chance_modifier": 60
+    },
+    {
+      "level": 2,
+      "name": "hard",
+      "locked": false,
+      "active": false,
+      "fall_speed_modifier": 40,
+      "timer_delay": 1050,
+      "food_count": 8,
+      "food_types": [
+        12,
+        11,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "food_chance_modifier": 50
+    },
+    {
+      "level": 3,
+      "name": "infinity",
+      "locked": false,
+      "active": false,
+      "fall_speed_modifier": 60,
+      "timer_delay": 1000,
+      "food_count": 10,
+      "food_types": [
+        12,
+        11,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "food_chance_modifier": 60
+    }
+  ]
+}

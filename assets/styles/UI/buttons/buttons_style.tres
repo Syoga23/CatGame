@@ -1,0 +1,17 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://c8k62fruyylkk"]
+
+[ext_resource type="FontFile" uid="uid://cn1i4gg7fwr82" path="res://assets/fonts/PressStart2P-Regular.ttf" id="1_y47aq"]
+[ext_resource type="Texture2D" uid="uid://86cs141adb8p" path="res://assets/textures/UI/buttons/button.png" id="2_fs5o2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5sper"]
+texture = ExtResource("2_fs5o2")
+
+[resource]
+default_font = ExtResource("1_y47aq")
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/constants/outline_size = 0
+Button/fonts/font = ExtResource("1_y47aq")
+Button/styles/focus = SubResource("StyleBoxTexture_5sper")
+Button/styles/hover = SubResource("StyleBoxTexture_5sper")
+Button/styles/normal = SubResource("StyleBoxTexture_5sper")
+Button/styles/pressed = SubResource("StyleBoxTexture_5sper")

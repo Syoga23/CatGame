@@ -1,0 +1,82 @@
+{
+"bad_food": [
+  {"level": 0,
+  "chances":
+  [{"id": 0, "type": "S", "chance": 0.0},
+	{"id": 1, "type": "A", "chance": 0.0},
+	{"id": 2, "type": "B", "chance": 0.0},
+	{"id": 3, "type": "C", "chance": 0.15},
+	{"id": 4, "type": "D", "chance": 0.25}]
+  },
+  {"level": 1,
+  "chances":
+  [{"id": 0, "type": "S", "chance": 0.0},
+	{"id": 1, "type": "A", "chance": 0.0},
+	{"id": 2, "type": "B", "chance": 0.45},
+	{"id": 3, "type": "C", "chance": 0.35},
+	{"id": 4, "type": "D", "chance": 0.25}]
+  },
+  {"level": 2,
+  "chances":
+  [{"id": 0, "type": "S", "chance": 0.0},
+	{"id": 1, "type": "A", "chance": 0.4},
+	{"id": 2, "type": "B", "chance": 0.45},
+	{"id": 3, "type": "C", "chance": 0.45},
+	{"id": 4, "type": "D", "chance": 0.25}]
+  },
+  {"level": 3,
+  "chances":
+  [{"id": 0, "type": "S", "chance": 0.5},
+	{"id": 1, "type": "A", "chance": 0.5},
+	{"id": 2, "type": "B", "chance": 0.65},
+	{"id": 3, "type": "C", "chance": 0.45},
+	{"id": 4, "type": "D", "chance": 0.25}]
+  }
+  ],
+"good_food": [
+  {"level": 0,
+  "chances":
+  [{"id": 5, "type": "S", "chance": 0.0},
+	{"id": 6, "type": "A", "chance": 0.0},
+	{"id": 7, "type": "B", "chance": 0.0},
+	{"id": 8, "type": "C", "chance": 0.0},
+	{"id": 9, "type": "C", "chance": 0.0},
+	{"id": 10, "type": "D", "chance": 0.5},
+	{"id": 11, "type": "D", "chance": 0.5},
+	{"id": 12, "type": "D", "chance": 0.5}]
+  },
+  {"level": 1,
+  "chances":
+  [{"id": 5, "type": "S", "chance": 0.0},
+	{"id": 6, "type": "A", "chance": 0.0},
+	{"id": 7, "type": "B", "chance": 0.0},
+	{"id": 8, "type": "C", "chance": 0.5},
+	{"id": 9, "type": "C", "chance": 0.5},
+	{"id": 10, "type": "D", "chance": 0.3},
+	{"id": 11, "type": "D", "chance": 0.3},
+	{"id": 12, "type": "D", "chance": 0.3}]
+  },
+  {"level": 2,
+  "chances":
+  [{"id": 5, "type": "S", "chance": 0.0},
+	{"id": 6, "type": "A", "chance": 0.55},
+	{"id": 7, "type": "B", "chance": 0.55},
+	{"id": 8, "type": "C", "chance": 0.45},
+	{"id": 9, "type": "C", "chance": 0.45},
+	{"id": 10, "type": "D", "chance": 0.25},
+	{"id": 11, "type": "D", "chance": 0.25},
+	{"id": 12, "type": "D", "chance": 0.25}]
+  },
+  {"level": 3,
+  "chances":
+  [{"id": 5, "type": "S", "chance": 0.45},
+	{"id": 6, "type": "A", "chance": 0.55},
+	{"id": 7, "type": "B", "chance": 0.55},
+	{"id": 8, "type": "C", "chance": 0.45},
+	{"id": 9, "type": "C", "chance": 0.45},
+	{"id": 10, "type": "D", "chance": 0.25},
+	{"id": 11, "type": "D", "chance": 0.25},
+	{"id": 12, "type": "D", "chance": 0.25}]
+  }
+  ]
+}

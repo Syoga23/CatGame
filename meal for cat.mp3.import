@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://k4x5rrhsp8co"
+path="res://.godot/imported/meal for cat.mp3-1d681f2ed4339dd437c64d4b943573a1.mp3str"
+
+[deps]
+
+source_file="res://meal for cat.mp3"
+dest_files=["res://.godot/imported/meal for cat.mp3-1d681f2ed4339dd437c64d4b943573a1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,255 @@
+[gd_scene load_steps=22 format=3 uid="uid://bwi0kxnjh6pwu"]
+
+[ext_resource type="Script" path="res://assets/scripts/GameScene.gd" id="1_usl6m"]
+[ext_resource type="Texture2D" uid="uid://cf6ly4wrfhe8d" path="res://assets/textures/background/game.png" id="2_ijsy7"]
+[ext_resource type="Texture2D" uid="uid://qr2s6ov6dwu2" path="res://assets/textures/game_scene_misc/meal_for_cat_menu_open1 (3).png" id="3_01gho"]
+[ext_resource type="Texture2D" uid="uid://m8vdtvrul6xq" path="res://assets/textures/game_scene_misc/wall.png" id="4_l6lpt"]
+[ext_resource type="PackedScene" uid="uid://dxjr13t76wfnf" path="res://assets/scenes/player.tscn" id="5_k7bkx"]
+[ext_resource type="PackedScene" uid="uid://cbmej668n1hpn" path="res://assets/scenes/food_generator.tscn" id="6_jc1du"]
+[ext_resource type="Texture2D" uid="uid://c2b1ywx77jfv6" path="res://assets/textures/UI/healthbar/hp_bar_main.png" id="7_g4abo"]
+[ext_resource type="Texture2D" uid="uid://df6p5swwqqdca" path="res://assets/textures/UI/healthbar/hp_bar_shine.png" id="8_g07wh"]
+[ext_resource type="Texture2D" uid="uid://ckf6xu6635qis" path="res://assets/textures/UI/healthbar/hp_bar_green.png" id="9_osbux"]
+[ext_resource type="Script" path="res://assets/scripts/HealthBar.gd" id="10_4ushu"]
+[ext_resource type="Texture2D" uid="uid://4j4gyxrsp7o8" path="res://assets/textures/UI/buttons/menu.png" id="11_gkotl"]
+[ext_resource type="FontFile" uid="uid://cn1i4gg7fwr82" path="res://assets/fonts/PressStart2P-Regular.ttf" id="11_rlmbe"]
+[ext_resource type="Script" path="res://assets/scripts/ScoreLabel.gd" id="12_ixq8r"]
+[ext_resource type="Script" path="res://assets/scripts/GameOver_overlay.gd" id="13_afsts"]
+[ext_resource type="Theme" uid="uid://c8k62fruyylkk" path="res://assets/styles/UI/buttons/buttons_style.tres" id="14_351wk"]
+[ext_resource type="StyleBox" uid="uid://xusyg0pwk1b6" path="res://assets/styles/UI/buttons/new_style_box_texture.tres" id="14_w3w8h"]
+[ext_resource type="AudioStream" uid="uid://b6cwahk0dpg1e" path="res://assets/audio/Sound/Game_Over.wav" id="15_fll8r"]
+[ext_resource type="AudioStream" uid="uid://bp21jul4pnw6" path="res://assets/audio/Music/Game.mp3" id="16_mw7bp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xseuy"]
+font = ExtResource("11_rlmbe")
+font_size = 30
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_sv7i2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u2xba"]
+font = ExtResource("11_rlmbe")
+font_size = 50
+font_color = Color(1, 0, 0, 1)
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource("1_usl6m")
+metadata/_edit_horizontal_guides_ = [-161.0]
+
+[node name="BG" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="BG"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="background" type="TextureRect" parent="BG/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_ijsy7")
+metadata/_edit_lock_ = true
+
+[node name="windows" type="TextureRect" parent="BG/MarginContainer/background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.96
+offset_top = -40.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+texture = ExtResource("3_01gho")
+metadata/_edit_lock_ = true
+
+[node name="wall" type="TextureRect" parent="BG/MarginContainer/background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.968
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+texture = ExtResource("4_l6lpt")
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="BG" instance=ExtResource("5_k7bkx")]
+position = Vector2(397, 812.5)
+scale = Vector2(0.125, 0.125)
+
+[node name="FoodGenerator" parent="BG" instance=ExtResource("6_jc1du")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HPMargin" type="MarginContainer" parent="UI"]
+visibility_layer = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -123.0
+offset_bottom = 10.0
+grow_horizontal = 0
+scale = Vector2(2.5, 2.5)
+pivot_offset = Vector2(133, 0)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="HealthBar" type="TextureProgressBar" parent="UI/HPMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+value = 100.0
+texture_under = ExtResource("7_g4abo")
+texture_over = ExtResource("8_g07wh")
+texture_progress = ExtResource("9_osbux")
+script = ExtResource("10_4ushu")
+
+[node name="ScoreMargin" type="MarginContainer" parent="UI"]
+offset_right = 109.0
+offset_bottom = 41.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ScoreMargin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="ScoreLabel" type="Label" parent="UI/ScoreMargin/VBoxContainer"]
+unique_name_in_owner = true
+visibility_layer = 7
+layout_mode = 2
+text = "Счет: 0"
+label_settings = SubResource("LabelSettings_xseuy")
+uppercase = true
+script = ExtResource("12_ixq8r")
+
+[node name="TextureButton" type="TextureButton" parent="UI/ScoreMargin/VBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+clip_contents = true
+custom_minimum_size = Vector2(70, 65)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("11_gkotl")
+stretch_mode = 0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="GameOver" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("13_afsts")
+
+[node name="ColorRect" type="ColorRect" parent="GameOver"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_sv7i2")
+color = Color(1, 0, 0, 0.235294)
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="GameOver/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -255.0
+offset_top = -142.5
+offset_right = 255.0
+offset_bottom = 142.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="VBoxButtons" type="VBoxContainer" parent="GameOver/ColorRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="GameOverButton" type="Label" parent="GameOver/ColorRect/MarginContainer/VBoxButtons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Игра окончена"
+label_settings = SubResource("LabelSettings_u2xba")
+horizontal_alignment = 1
+
+[node name="ScoreLabel_Death" type="Label" parent="GameOver/ColorRect/MarginContainer/VBoxButtons"]
+unique_name_in_owner = true
+visibility_layer = 7
+layout_mode = 2
+text = "Счет: 0"
+label_settings = SubResource("LabelSettings_xseuy")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameOver/ColorRect/MarginContainer/VBoxButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 30
+
+[node name="QuitMenuButton" type="Button" parent="GameOver/ColorRect/MarginContainer/VBoxButtons/HBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("14_351wk")
+theme_override_font_sizes/font_size = 20
+text = "Выйти в меню
+"
+
+[node name="PlayAgainButton" type="Button" parent="GameOver/ColorRect/MarginContainer/VBoxButtons/HBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("14_351wk")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/hover = ExtResource("14_w3w8h")
+theme_override_styles/pressed = ExtResource("14_w3w8h")
+theme_override_styles/normal = ExtResource("14_w3w8h")
+text = "Играть заново"
+
+[node name="GameOver" type="AudioStreamPlayer" parent="GameOver"]
+process_mode = 3
+stream = ExtResource("15_fll8r")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_mw7bp")
+volume_db = -20.0
+autoplay = true
+bus = &"Music"
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
+[connection signal="tree_entered" from="UI/HPMargin/HealthBar" to="UI/HPMargin/HealthBar" method="_on_tree_entered"]
+[connection signal="tree_exiting" from="UI/HPMargin/HealthBar" to="UI/HPMargin/HealthBar" method="_on_tree_exiting"]
+[connection signal="tree_entered" from="UI/ScoreMargin/VBoxContainer/ScoreLabel" to="UI/ScoreMargin/VBoxContainer/ScoreLabel" method="_on_tree_entered"]
+[connection signal="tree_exiting" from="UI/ScoreMargin/VBoxContainer/ScoreLabel" to="UI/ScoreMargin/VBoxContainer/ScoreLabel" method="_on_tree_exiting"]
+[connection signal="button_down" from="UI/ScoreMargin/VBoxContainer/TextureButton" to="." method="_on_texture_button_button_down"]
+[connection signal="button_up" from="UI/ScoreMargin/VBoxContainer/TextureButton" to="." method="_on_texture_button_button_up"]
+[connection signal="pressed" from="UI/ScoreMargin/VBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="tree_entered" from="GameOver" to="GameOver" method="_on_tree_entered"]
+[connection signal="tree_exiting" from="GameOver" to="GameOver" method="_on_tree_exiting"]
+[connection signal="pressed" from="GameOver/ColorRect/MarginContainer/VBoxButtons/HBoxContainer/QuitMenuButton" to="GameOver" method="_on_quit_menu_button_pressed"]
+[connection signal="pressed" from="GameOver/ColorRect/MarginContainer/VBoxButtons/HBoxContainer/PlayAgainButton" to="GameOver" method="_on_play_again_button_pressed"]

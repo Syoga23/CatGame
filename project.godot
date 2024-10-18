@@ -11,26 +11,22 @@ config_version=5
 [application]
 
 config/name="MealForCat"
-run/main_scene="res://scenes/main_menu.tscn"
-config/auto_accept_quit=false
-config/features=PackedStringArray("4.2", "GL Compatibility")
-boot_splash/show_image=false
-boot_splash/fullsize=false
-boot_splash/use_filter=false
+run/main_scene="res://assets/scenes/main_menu.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.png.png"
 
 [autoload]
 
-EventBus="*res://singletones/EventBus.gd"
-ConfigFileHandler="*res://singletones/ConfigFileHandler.gd"
-StaticData="*res://singletones/StaticData.gd"
+EventBus="*res://assets/singletones/EventBus.gd"
+ConfigFileHandler="*res://assets/singletones/ConfigFileHandler.gd"
+StaticData="*res://assets/singletones/StaticData.gd"
 
 [display]
 
 window/size/viewport_width=800
 window/size/viewport_height=1000
-window/stretch/mode="canvas_items"
-window/stretch/aspect="ignore"
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 window/handheld/orientation=1
 
 [filesystem]
@@ -56,3 +52,4 @@ textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
+textures/default_filters/anisotropic_filtering_level=0

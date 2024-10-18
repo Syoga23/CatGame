@@ -1,0 +1,95 @@
+{
+  "foods": [
+    {
+      "id": 0,
+      "name": "onion",
+      "score": -10,
+      "saturation": -60,
+      "fall_speed": 400
+    },
+    {
+      "id": 1,
+      "name": "chocolate",
+      "score": -5,
+      "saturation": -30,
+      "fall_speed": 339
+    },
+    {
+      "id": 2,
+      "name": "milk",
+      "score": -4,
+      "saturation": -20,
+      "fall_speed": 289
+    },
+    {
+      "id": 3,
+      "name": "chicken_grill",
+      "score": -2,
+      "saturation": -10,
+      "fall_speed": 236
+    },
+    {
+      "id": 4,
+      "name": "meat_grill",
+      "score": -1,
+      "saturation": -10,
+      "fall_speed": 217
+    },
+    {
+      "id": 5,
+      "name": "broccoli",
+      "score": 30,
+      "saturation": 30,
+      "fall_speed": 413
+    },
+    {
+      "id": 6,
+      "name": "cabbage",
+      "score": 20,
+      "saturation": 20,
+      "fall_speed": 321
+    },
+    {
+      "id": 7,
+      "name": "carrot",
+      "score": 15,
+      "saturation": 15,
+      "fall_speed": 269
+    },
+    {
+      "id": 8,
+      "name": "watermelon",
+      "score": 10,
+      "saturation": 10,
+      "fall_speed": 223
+    },
+    {
+      "id": 9,
+      "name": "cucumber",
+      "score": 10,
+      "saturation": 10,
+      "fall_speed": 226
+    },
+    {
+      "id": 10,
+      "name": "fish_clean",
+      "score": 5,
+      "saturation": 5,
+      "fall_speed": 218
+    },
+    {
+      "id": 11,
+      "name": "meat_raw",
+      "score": 5,
+      "saturation": 5,
+      "fall_speed": 213
+    },
+    {
+      "id": 12,
+      "name": "chicken_raw",
+      "score": 5,
+      "saturation": 5,
+      "fall_speed": 198
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlmg1biueiwe3"]
+
+[ext_resource type="Script" path="res://assets/scripts/food_class.gd" id="1_5mohu"]
+[ext_resource type="Script" path="res://assets/scripts/hitbox.gd" id="2_jmsjv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_we7pu"]
+size = Vector2(16, 15)
+
+[node name="Steak" type="Node2D"]
+script = ExtResource("1_5mohu")
+
+[node name="hitbox" type="Area2D" parent="." groups=["food"]]
+script = ExtResource("2_jmsjv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_we7pu")
+
+[node name="Sprite2D" type="Sprite2D" parent="hitbox"]
+unique_name_in_owner = true
+
+[connection signal="area_entered" from="hitbox" to="." method="Eaten_By_Player"]
