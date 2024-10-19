@@ -6,7 +6,7 @@ var motion = Vector2()
 @onready var Hurt_Sound: AudioStreamPlayer = $HurtSound
 @onready var Bite_Sound: AudioStreamPlayer = $BiteSound
 @onready var BodySprite: AnimatedSprite2D = %Body
-@onready var HeadSprite: AnimatedSprite2D = %Head
+@onready var TailSprite: AnimatedSprite2D = %Tail
 @onready var collision_shape : CollisionShape2D = %PlayerCollisionShape
 
 
@@ -17,18 +17,14 @@ var motion = Vector2()
 
 var Score = 0
 var vel = 0
+
 var flip_shape = 0
-var flip_head = 0
-var flip_basis = 0
-var flip_sprite = 0
-var kostil = 0
+var flip_tail = 0
 
 func _ready():
 	set_process_input(true) 
 	flip_shape = collision_shape.position.x
-	flip_head = HeadSprite.position.x
-	flip_basis = PBasis.position.x
-	flip_sprite = PBasis.texture.get_width()
+	flip_tail = TailSprite.position.x
 
 func _process(delta):
 	
@@ -68,7 +64,7 @@ func _process(delta):
 	if camera:
 		var view = get_viewport_rect().size 
 		var camera_position = camera.global_position
-		var sprite_half = (kostil * PBasis.scale.x) * 2
+		var sprite_half = (PBasis.texture.get_width() * PBasis.scale.x) * 2
 		var left_bound = camera_position.x + sprite_half
 		var right_bound = view.x - sprite_half
 		global_position.x = clamp(global_position.x, left_bound, right_bound)
@@ -81,7 +77,7 @@ func food_eaten(saturation: int, score_points: int):
 		Hurt_Sound.play()
 	elif(saturation > 0):
 		Bite_Sound.play()
-	HeadSprite.play("Bite")
+	BodySprite.play("Bite")
 	EventBus.health_changed.emit(HealthPoints)
 	EventBus.score_changed.emit(Score)
 
@@ -90,17 +86,14 @@ func player_death():
 
 func flip_player(mirrored: bool):
 	BodySprite.flip_h = mirrored
-	HeadSprite.flip_h = mirrored
+	TailSprite.flip_h = mirrored
 	if mirrored == true:
-		kostil = flip_sprite + 33
-		PBasis.position.x = flip_basis + 15
-		HeadSprite.position.x = flip_head + 15
-		collision_shape.position.x = flip_shape + 600
+		collision_shape.position.x = flip_shape + 190
+		TailSprite.position.x = flip_tail - 41
 	else:
-		kostil = flip_sprite 
-		PBasis.position.x = flip_basis
-		HeadSprite.position.x = flip_head
 		collision_shape.position.x = flip_shape
+		TailSprite.position.x = flip_tail
+		
 
 func _on_timer_timeout():
 	HealthPoints -= hunger_decrease_rate
@@ -108,5 +101,4 @@ func _on_timer_timeout():
 	EventBus.health_changed.emit(HealthPoints)
 
 func _on_cat_animation_finished() -> void:
-	print("DONE")
-	HeadSprite.play("Idle")
+	BodySprite.play("Idle")

@@ -19,13 +19,13 @@ func _ready():
 
 func _process(_delta):
 	
-	if Score >= 150:
+	if Score >= 100:
 		#medium
 		change_level(1)
-	if Score >= 500:
+	if Score >= 200:
 		#hard
 		change_level(2)
-	if Score >= 2000:
+	if Score >= 300:
 		#infinite
 		change_level(3)
 

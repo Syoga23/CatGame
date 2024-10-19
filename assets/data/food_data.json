@@ -71,13 +71,6 @@
       "fall_speed": 226
     },
     {
-      "id": 10,
-      "name": "fish_clean",
-      "score": 5,
-      "saturation": 5,
-      "fall_speed": 218
-    },
-    {
       "id": 11,
       "name": "meat_raw",
       "score": 5,

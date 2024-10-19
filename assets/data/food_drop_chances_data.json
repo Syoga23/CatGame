@@ -41,7 +41,6 @@
 	{"id": 7, "type": "B", "chance": 0.0},
 	{"id": 8, "type": "C", "chance": 0.0},
 	{"id": 9, "type": "C", "chance": 0.0},
-	{"id": 10, "type": "D", "chance": 0.5},
 	{"id": 11, "type": "D", "chance": 0.5},
 	{"id": 12, "type": "D", "chance": 0.5}]
   },
@@ -52,7 +51,6 @@
 	{"id": 7, "type": "B", "chance": 0.0},
 	{"id": 8, "type": "C", "chance": 0.5},
 	{"id": 9, "type": "C", "chance": 0.5},
-	{"id": 10, "type": "D", "chance": 0.3},
 	{"id": 11, "type": "D", "chance": 0.3},
 	{"id": 12, "type": "D", "chance": 0.3}]
   },
@@ -63,7 +61,6 @@
 	{"id": 7, "type": "B", "chance": 0.55},
 	{"id": 8, "type": "C", "chance": 0.45},
 	{"id": 9, "type": "C", "chance": 0.45},
-	{"id": 10, "type": "D", "chance": 0.25},
 	{"id": 11, "type": "D", "chance": 0.25},
 	{"id": 12, "type": "D", "chance": 0.25}]
   },
@@ -74,7 +71,6 @@
 	{"id": 7, "type": "B", "chance": 0.55},
 	{"id": 8, "type": "C", "chance": 0.45},
 	{"id": 9, "type": "C", "chance": 0.45},
-	{"id": 10, "type": "D", "chance": 0.25},
 	{"id": 11, "type": "D", "chance": 0.25},
 	{"id": 12, "type": "D", "chance": 0.25}]
   }

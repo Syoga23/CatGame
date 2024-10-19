@@ -41,7 +41,8 @@ func change_timer_delay(time: float):
 	Timer1.wait_time = time / 1000
 
 func _on_timer_timeout():
-	
+	#bug with out of bounds
+	#Out of bounds get index '6' (on base: 'Array')
 	for x in spawn_food.size():
 		#print(x, " ", spawn_food.size())
 		generate_food(spawn_food[x])

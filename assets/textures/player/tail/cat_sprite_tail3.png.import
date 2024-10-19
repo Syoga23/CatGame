@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://buaa71uxcity1"
-path="res://.godot/imported/cat_body_tail1.png-68764bd51f3e269faa634d9aef55f2e0.ctex"
+uid="uid://dk0rn0ah05otl"
+path="res://.godot/imported/cat_sprite_tail3.png-c358b74e3191fa0f5f2aaeb9c5f2a164.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/player/body/cat_body_tail1.png"
-dest_files=["res://.godot/imported/cat_body_tail1.png-68764bd51f3e269faa634d9aef55f2e0.ctex"]
+source_file="res://assets/textures/player/tail/cat_sprite_tail3.png"
+dest_files=["res://.godot/imported/cat_sprite_tail3.png-c358b74e3191fa0f5f2aaeb9c5f2a164.ctex"]
 
 [params]
 

@@ -1,13 +1,13 @@
 [gd_scene load_steps=15 format=3 uid="uid://dxjr13t76wfnf"]
 
 [ext_resource type="Script" path="res://assets/scripts/PlayerScript.gd" id="1_1pc83"]
-[ext_resource type="Texture2D" uid="uid://buaa71uxcity1" path="res://assets/textures/player/body/cat_body_tail1.png" id="2_aumf3"]
-[ext_resource type="Texture2D" uid="uid://xfn1y0co67wq" path="res://assets/textures/player/body/cat_body_tail2.png" id="3_m222n"]
-[ext_resource type="Texture2D" uid="uid://dgb1viqujax0t" path="res://assets/textures/player/body/cat_body_tail3.png" id="4_wxvop"]
-[ext_resource type="Texture2D" uid="uid://d2jf8pc7p5fxu" path="res://assets/textures/player/body/cat_body_tail4.png" id="5_b3ej4"]
-[ext_resource type="Texture2D" uid="uid://docdhb2rsfjot" path="res://assets/textures/player/body/cat_body_tail5.png" id="6_1v4bh"]
-[ext_resource type="Texture2D" uid="uid://bgkuspcd4iflp" path="res://assets/textures/player/head/cat_closed.png" id="7_sgcdf"]
-[ext_resource type="Texture2D" uid="uid://c172mpxcwlj1b" path="res://assets/textures/player/head/cat_open.png" id="8_3u3i0"]
+[ext_resource type="Texture2D" uid="uid://cgum305p83i2o" path="res://assets/textures/player/body/cat_sprite1.png" id="2_eetao"]
+[ext_resource type="Texture2D" uid="uid://dhvy7xhds0at3" path="res://assets/textures/player/body/cat_sprite2.png" id="3_wgug7"]
+[ext_resource type="Texture2D" uid="uid://bpuvbefeibyan" path="res://assets/textures/player/tail/cat_sprite_tail1.png" id="4_3xuu6"]
+[ext_resource type="Texture2D" uid="uid://33ea2bpwnwru" path="res://assets/textures/player/tail/cat_sprite_tail2.png" id="5_0vrlh"]
+[ext_resource type="Texture2D" uid="uid://dk0rn0ah05otl" path="res://assets/textures/player/tail/cat_sprite_tail3.png" id="6_te6a4"]
+[ext_resource type="Texture2D" uid="uid://cm2st331s3psj" path="res://assets/textures/player/tail/cat_sprite_tail4.png" id="7_eg3pe"]
+[ext_resource type="Texture2D" uid="uid://b4iggxbioi0jg" path="res://assets/textures/player/tail/cat_sprite_tail5.png" id="8_q7jen"]
 [ext_resource type="Texture2D" uid="uid://dw56jug6iitpy" path="res://assets/textures/player/Basis/Basis.png" id="9_xxyyo"]
 [ext_resource type="AudioStream" uid="uid://62vqdj8mnu8n" path="res://assets/audio/Sound/Damage.wav" id="10_kr3yk"]
 [ext_resource type="AudioStream" uid="uid://it3ppjsiff4c" path="res://assets/audio/Sound/bite.wav" id="11_vtfjj"]
@@ -16,33 +16,10 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_aumf3")
+"texture": ExtResource("3_wgug7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_m222n")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_wxvop")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_b3ej4")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_1v4bh")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_jcrcq"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_sgcdf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_3u3i0")
+"texture": ExtResource("2_eetao")
 }],
 "loop": false,
 "name": &"Bite",
@@ -50,16 +27,39 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_sgcdf")
+"texture": ExtResource("2_eetao")
 }],
 "loop": false,
 "name": &"Idle",
 "speed": 1.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_jcrcq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3xuu6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0vrlh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_te6a4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_eg3pe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_q7jen")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pjv5u"]
-radius = 132.0
-height = 364.0
+radius = 135.0
+height = 360.0
 
 [node name="Player" type="Node2D"]
 
@@ -72,19 +72,22 @@ threshold = 7
 
 [node name="Body" type="AnimatedSprite2D" parent="PlayerArea2D"]
 unique_name_in_owner = true
+position = Vector2(10, 4)
 scale = Vector2(30, 30)
 sprite_frames = SubResource("SpriteFrames_1yseq")
-animation = &"Idle"
-autoplay = "Idle"
-frame_progress = 0.443001
-offset = Vector2(6, 0)
-
-[node name="Head" type="AnimatedSprite2D" parent="PlayerArea2D/Body"]
-unique_name_in_owner = true
-position = Vector2(-1.5, -20.5)
-sprite_frames = SubResource("SpriteFrames_jcrcq")
 animation = &"Bite"
 autoplay = "Idle"
+frame = 1
+frame_progress = 1.0
+offset = Vector2(1, 0)
+
+[node name="Tail" type="AnimatedSprite2D" parent="PlayerArea2D/Body"]
+unique_name_in_owner = true
+position = Vector2(21.5, 12)
+sprite_frames = SubResource("SpriteFrames_jcrcq")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.34514
 
 [node name="PlayerBasis" type="Sprite2D" parent="PlayerArea2D/Body"]
 unique_name_in_owner = true
@@ -96,8 +99,8 @@ texture = ExtResource("9_xxyyo")
 
 [node name="PlayerCollisionShape" type="CollisionShape2D" parent="PlayerArea2D"]
 unique_name_in_owner = true
-position = Vector2(-122, -447)
-rotation = 1.5708
+position = Vector2(-55, -85)
+rotation = -1.5708
 shape = SubResource("CapsuleShape2D_pjv5u")
 
 [node name="Timer" type="Timer" parent="PlayerArea2D"]
