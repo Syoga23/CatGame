@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://e2tlmo7tci01"]
+
+[ext_resource type="StyleBox" uid="uid://bi762oxpabqfs" path="res://assets/styles/UI/ScoreBoard/RowForScoreBoard.tres" id="1_fe4sj"]
+[ext_resource type="LabelSettings" uid="uid://daf6ufyfqwogr" path="res://assets/styles/UI/buttons/Font_Settings.tres" id="2_oiebp"]
+
+[node name="RowPanel" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+offset_right = 800.0
+offset_bottom = 23.0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Position" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.3
+theme_override_styles/normal = ExtResource("1_fe4sj")
+text = "Позиция"
+label_settings = ExtResource("2_oiebp")
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/normal = ExtResource("1_fe4sj")
+text = "Игрок"
+label_settings = ExtResource("2_oiebp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/normal = ExtResource("1_fe4sj")
+text = "Счет"
+label_settings = ExtResource("2_oiebp")
+horizontal_alignment = 1
+vertical_alignment = 1

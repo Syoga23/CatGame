@@ -1,0 +1,76 @@
+[gd_scene load_steps=3 format=3 uid="uid://btplohu28tl1f"]
+
+[ext_resource type="Script" path="res://assets/scripts/confetti.gd" id="1_bwy4f"]
+
+[sub_resource type="Curve" id="Curve_vjtgk"]
+_data = [Vector2(0, 0.152174), 0.0, 0.0, 0, 0, Vector2(0.996241, 0.283385), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Confetti" type="Node2D"]
+script = ExtResource("1_bwy4f")
+
+[node name="green" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 64
+lifetime = 5.0
+one_shot = true
+explosiveness = 0.8
+randomness = 0.5
+lifetime_randomness = 0.25
+direction = Vector2(0, -1)
+gravity = Vector2(0, 125)
+initial_velocity_min = 147.9
+initial_velocity_max = 606.65
+angular_velocity_min = 58.46
+angular_velocity_max = 280.0
+linear_accel_min = 4.0
+linear_accel_max = 15.0
+scale_amount_min = 15.0
+scale_amount_max = 25.0
+scale_amount_curve = SubResource("Curve_vjtgk")
+color = Color(0, 0.867674, 0, 1)
+
+[node name="red" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 64
+lifetime = 5.0
+one_shot = true
+explosiveness = 0.8
+randomness = 0.5
+lifetime_randomness = 0.25
+direction = Vector2(0, -1)
+gravity = Vector2(0, 125)
+initial_velocity_min = 147.9
+initial_velocity_max = 606.65
+angular_velocity_min = 58.46
+angular_velocity_max = 280.0
+linear_accel_min = 4.0
+linear_accel_max = 15.0
+scale_amount_min = 15.0
+scale_amount_max = 25.0
+scale_amount_curve = SubResource("Curve_vjtgk")
+color = Color(0.842635, 3.56168e-06, 4.81307e-07, 1)
+
+[node name="yellow" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 64
+lifetime = 5.0
+one_shot = true
+explosiveness = 0.8
+randomness = 0.5
+lifetime_randomness = 0.25
+direction = Vector2(0, -1)
+gravity = Vector2(0, 125)
+initial_velocity_min = 147.9
+initial_velocity_max = 606.65
+angular_velocity_min = 58.46
+angular_velocity_max = 280.0
+linear_accel_min = 4.0
+linear_accel_max = 15.0
+scale_amount_min = 15.0
+scale_amount_max = 25.0
+scale_amount_curve = SubResource("Curve_vjtgk")
+color = Color(0.813927, 0.813927, 0, 1)

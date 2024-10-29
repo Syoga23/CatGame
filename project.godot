@@ -20,11 +20,13 @@ config/icon="res://icon.png.png"
 EventBus="*res://assets/singletones/EventBus.gd"
 ConfigFileHandler="*res://assets/singletones/ConfigFileHandler.gd"
 StaticData="*res://assets/singletones/StaticData.gd"
+LbModule="*res://assets/singletones/LB_Module.gd"
 
 [display]
 
 window/size/viewport_width=800
 window/size/viewport_height=1000
+window/size/resizable=false
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/handheld/orientation=1

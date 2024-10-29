@@ -1,0 +1,108 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6ksa33rodxei"]
+
+[ext_resource type="LabelSettings" uid="uid://daf6ufyfqwogr" path="res://assets/styles/UI/buttons/Font_Settings.tres" id="1_lu3px"]
+[ext_resource type="Script" path="res://assets/leaderboards.gd" id="1_wlshn"]
+[ext_resource type="StyleBox" uid="uid://bi762oxpabqfs" path="res://assets/styles/UI/ScoreBoard/RowForScoreBoard.tres" id="2_yt7qu"]
+[ext_resource type="Theme" uid="uid://c8k62fruyylkk" path="res://assets/styles/UI/buttons/buttons_style.tres" id="4_yenfl"]
+[ext_resource type="FontFile" uid="uid://cn1i4gg7fwr82" path="res://assets/fonts/PressStart2P-Regular.ttf" id="5_di2o8"]
+[ext_resource type="Texture2D" uid="uid://d3j0e46hln73e" path="res://assets/textures/UI/buttons/refresh.png" id="6_qwjdb"]
+
+[sub_resource type="Theme" id="Theme_3a6kf"]
+
+[node name="Leaderboards" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wlshn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme = SubResource("Theme_3a6kf")
+theme_override_styles/panel = ExtResource("2_yt7qu")
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Доска лидеров"
+label_settings = ExtResource("1_lu3px")
+uppercase = true
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.886275, 0.709804, 0.533333, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/ColorRect/MarginContainer"]
+layout_mode = 2
+
+[node name="Table" type="VBoxContainer" parent="VBoxContainer/ColorRect/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 0
+theme = SubResource("Theme_3a6kf")
+theme_override_styles/panel = ExtResource("2_yt7qu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ToMenu" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/CenterContainer2"]
+custom_minimum_size = Vector2(250, 65)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_yenfl")
+theme_override_fonts/font = ExtResource("5_di2o8")
+theme_override_font_sizes/font_size = 22
+text = "В меню"
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Refresh" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(250, 65)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_yenfl")
+theme_override_fonts/font = ExtResource("5_di2o8")
+theme_override_font_sizes/font_size = 22
+icon = ExtResource("6_qwjdb")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="VBoxContainer/PanelContainer2/HBoxContainer/CenterContainer2/ToMenu" to="." method="_on_to_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer2/HBoxContainer/CenterContainer/Refresh" to="." method="_on_refresh_pressed"]

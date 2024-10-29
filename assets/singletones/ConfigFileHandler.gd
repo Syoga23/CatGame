@@ -9,12 +9,17 @@ func _ready():
 		config.set_value("Audio", "Master", 1.0)
 		config.set_value("Audio", "Music", 1.0)
 		config.set_value("Audio", "SFX", 1.0)
+		config.set_value("Audio", "Mute", false)
 		
 		config.save(SETTINGS_FILE_PATH)
 	else:
 		config.load(SETTINGS_FILE_PATH)
 
 func save_audio_settings(key: String, value: float):
+	config.set_value("Audio", key, value)
+	config.save(SETTINGS_FILE_PATH)	
+
+func save_audio_settings_bool(key: String, value: bool):
 	config.set_value("Audio", key, value)
 	config.save(SETTINGS_FILE_PATH)
 

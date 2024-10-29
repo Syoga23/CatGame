@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dkiledwau3qkk"
+path="res://.godot/imported/Game Theory Remix.mp3-58b0fcb2f21e3377ce20b372da8ef9cc.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/Music/Game Theory Remix.mp3"
+dest_files=["res://.godot/imported/Game Theory Remix.mp3-58b0fcb2f21e3377ce20b372da8ef9cc.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

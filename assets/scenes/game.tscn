@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bwi0kxnjh6pwu"]
+[gd_scene load_steps=27 format=3 uid="uid://bwi0kxnjh6pwu"]
 
 [ext_resource type="Script" path="res://assets/scripts/GameScene.gd" id="1_usl6m"]
 [ext_resource type="Texture2D" uid="uid://cf6ly4wrfhe8d" path="res://assets/textures/background/game.png" id="2_ijsy7"]
@@ -14,10 +14,14 @@
 [ext_resource type="FontFile" uid="uid://cn1i4gg7fwr82" path="res://assets/fonts/PressStart2P-Regular.ttf" id="11_rlmbe"]
 [ext_resource type="Script" path="res://assets/scripts/ScoreLabel.gd" id="12_ixq8r"]
 [ext_resource type="Script" path="res://assets/scripts/GameOver_overlay.gd" id="13_afsts"]
+[ext_resource type="Script" path="res://assets/scripts/texture_button.gd" id="14_27kap"]
 [ext_resource type="Theme" uid="uid://c8k62fruyylkk" path="res://assets/styles/UI/buttons/buttons_style.tres" id="14_351wk"]
 [ext_resource type="StyleBox" uid="uid://xusyg0pwk1b6" path="res://assets/styles/UI/buttons/new_style_box_texture.tres" id="14_w3w8h"]
 [ext_resource type="AudioStream" uid="uid://b6cwahk0dpg1e" path="res://assets/audio/Sound/Game_Over.wav" id="15_fll8r"]
 [ext_resource type="AudioStream" uid="uid://bp21jul4pnw6" path="res://assets/audio/Music/Game.mp3" id="16_mw7bp"]
+[ext_resource type="Texture2D" uid="uid://bhmrjbxsc8n1j" path="res://assets/textures/UI/buttons/sound_on.png" id="19_lnfb3"]
+[ext_resource type="Script" path="res://assets/scripts/pause.gd" id="20_f3kes"]
+[ext_resource type="Script" path="res://assets/scripts/sound_button.gd" id="22_7o2rl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xseuy"]
 font = ExtResource("11_rlmbe")
@@ -31,6 +35,10 @@ outline_color = Color(0, 0, 0, 1)
 font = ExtResource("11_rlmbe")
 font_size = 50
 font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ai1mm"]
+font = ExtResource("11_rlmbe")
+font_size = 70
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_usl6m")
@@ -136,7 +144,7 @@ label_settings = SubResource("LabelSettings_xseuy")
 uppercase = true
 script = ExtResource("12_ixq8r")
 
-[node name="TextureButton" type="TextureButton" parent="UI/ScoreMargin/VBoxContainer"]
+[node name="PauseButton" type="TextureButton" parent="UI/ScoreMargin/VBoxContainer"]
 unique_name_in_owner = true
 process_mode = 3
 clip_contents = true
@@ -144,8 +152,10 @@ custom_minimum_size = Vector2(70, 65)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+action_mode = 0
 texture_normal = ExtResource("11_gkotl")
 stretch_mode = 0
+script = ExtResource("14_27kap")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -231,14 +241,103 @@ text = "Играть заново"
 [node name="GameOver" type="AudioStreamPlayer" parent="GameOver"]
 process_mode = 3
 stream = ExtResource("15_fll8r")
-volume_db = -20.0
+volume_db = -30.0
 bus = &"SFX"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_mw7bp")
-volume_db = -20.0
+volume_db = -40.0
 autoplay = true
 bus = &"Music"
+
+[node name="Pause" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+script = ExtResource("20_f3kes")
+
+[node name="ColorRect" type="ColorRect" parent="Pause"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.580392)
+
+[node name="MarginContainer" type="MarginContainer" parent="Pause/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Control" type="Control" parent="Pause/ColorRect/MarginContainer"]
+layout_mode = 2
+
+[node name="SoundButton" type="TextureButton" parent="Pause/ColorRect/MarginContainer/Control"]
+process_mode = 3
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+offset_right = 100.0
+offset_bottom = 100.0
+size_flags_horizontal = 0
+action_mode = 0
+texture_normal = ExtResource("19_lnfb3")
+stretch_mode = 4
+script = ExtResource("22_7o2rl")
+
+[node name="MarginContainer" type="MarginContainer" parent="Pause/ColorRect/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -55.0
+offset_right = 210.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause/ColorRect/MarginContainer/Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="PauseLabel" type="Label" parent="Pause/ColorRect/MarginContainer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Пауза
+"
+label_settings = SubResource("LabelSettings_ai1mm")
+uppercase = true
+
+[node name="Continue" type="Button" parent="Pause/ColorRect/MarginContainer/Control/MarginContainer/VBoxContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme = ExtResource("14_351wk")
+theme_override_font_sizes/font_size = 25
+text = "Продолжить"
+autowrap_mode = 2
+clip_text = true
+
+[node name="Exit" type="Button" parent="Pause/ColorRect/MarginContainer/Control/MarginContainer/VBoxContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme = ExtResource("14_351wk")
+theme_override_font_sizes/font_size = 25
+text = "Выйти из игры
+"
+autowrap_mode = 2
+clip_text = true
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
@@ -246,10 +345,17 @@ bus = &"Music"
 [connection signal="tree_exiting" from="UI/HPMargin/HealthBar" to="UI/HPMargin/HealthBar" method="_on_tree_exiting"]
 [connection signal="tree_entered" from="UI/ScoreMargin/VBoxContainer/ScoreLabel" to="UI/ScoreMargin/VBoxContainer/ScoreLabel" method="_on_tree_entered"]
 [connection signal="tree_exiting" from="UI/ScoreMargin/VBoxContainer/ScoreLabel" to="UI/ScoreMargin/VBoxContainer/ScoreLabel" method="_on_tree_exiting"]
-[connection signal="button_down" from="UI/ScoreMargin/VBoxContainer/TextureButton" to="." method="_on_texture_button_button_down"]
-[connection signal="button_up" from="UI/ScoreMargin/VBoxContainer/TextureButton" to="." method="_on_texture_button_button_up"]
-[connection signal="pressed" from="UI/ScoreMargin/VBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="button_down" from="UI/ScoreMargin/VBoxContainer/PauseButton" to="UI/ScoreMargin/VBoxContainer/PauseButton" method="_on_button_down"]
+[connection signal="button_up" from="UI/ScoreMargin/VBoxContainer/PauseButton" to="UI/ScoreMargin/VBoxContainer/PauseButton" method="_on_button_up"]
+[connection signal="pressed" from="UI/ScoreMargin/VBoxContainer/PauseButton" to="Pause" method="_on_pause_button_pressed"]
 [connection signal="tree_entered" from="GameOver" to="GameOver" method="_on_tree_entered"]
 [connection signal="tree_exiting" from="GameOver" to="GameOver" method="_on_tree_exiting"]
 [connection signal="pressed" from="GameOver/ColorRect/MarginContainer/VBoxButtons/HBoxContainer/QuitMenuButton" to="GameOver" method="_on_quit_menu_button_pressed"]
 [connection signal="pressed" from="GameOver/ColorRect/MarginContainer/VBoxButtons/HBoxContainer/PlayAgainButton" to="GameOver" method="_on_play_again_button_pressed"]
+[connection signal="button_down" from="Pause/ColorRect/MarginContainer/Control/SoundButton" to="Pause/ColorRect/MarginContainer/Control/SoundButton" method="_on_button_down"]
+[connection signal="button_up" from="Pause/ColorRect/MarginContainer/Control/SoundButton" to="Pause/ColorRect/MarginContainer/Control/SoundButton" method="_on_button_up"]
+[connection signal="pressed" from="Pause/ColorRect/MarginContainer/Control/SoundButton" to="Pause/ColorRect/MarginContainer/Control/SoundButton" method="_on_pressed"]
+[connection signal="tree_entered" from="Pause/ColorRect/MarginContainer/Control/SoundButton" to="Pause/ColorRect/MarginContainer/Control/SoundButton" method="_on_tree_entered"]
+[connection signal="tree_exiting" from="Pause/ColorRect/MarginContainer/Control/SoundButton" to="Pause/ColorRect/MarginContainer/Control/SoundButton" method="_on_tree_exiting"]
+[connection signal="pressed" from="Pause/ColorRect/MarginContainer/Control/MarginContainer/VBoxContainer/Continue" to="Pause" method="_on_continue_pressed"]
+[connection signal="pressed" from="Pause/ColorRect/MarginContainer/Control/MarginContainer/VBoxContainer/Exit" to="Pause" method="_on_exit_pressed"]

@@ -16,6 +16,7 @@ func Eaten_By_Player(body):
 		await get_tree().create_timer(0.02).timeout
 		queue_free()
 
+
 func init_food(food_info: Dictionary):
 	self.score = food_info["score"]
 	self.saturation = food_info["saturation"]

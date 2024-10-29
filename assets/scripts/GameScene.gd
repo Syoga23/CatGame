@@ -1,7 +1,5 @@
 extends Node2D
 
-@onready var notepad_button : TextureButton = %TextureButton
-
 var Score = 0
 var level = 0
 
@@ -13,8 +11,7 @@ var foods = StaticData.food_data["foods"]
 var found_data = null
 
 func _ready():
-	#костыль
-	notepad_button.pivot_offset = Vector2(50, 50)
+	get_viewport().size = DisplayServer.screen_get_size()
 	change_level(0)
 
 func _process(_delta):
@@ -57,13 +54,3 @@ func _on_tree_entered():
 
 func _on_tree_exiting():
 	EventBus.score_changed.disconnect(set_score)
-
-func _on_texture_button_button_down() -> void:
-	notepad_button.scale = Vector2(0.8, 0.8)
-
-func _on_texture_button_button_up() -> void:
-	notepad_button.scale = Vector2(1, 1)
-
-
-func _on_texture_button_pressed() -> void:
-	pass

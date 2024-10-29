@@ -108,7 +108,7 @@ autostart = true
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="PlayerArea2D"]
 stream = ExtResource("10_kr3yk")
-bus = &"hurt"
+volume_db = 10.0
 
 [node name="BiteSound" type="AudioStreamPlayer" parent="PlayerArea2D"]
 stream = ExtResource("11_vtfjj")

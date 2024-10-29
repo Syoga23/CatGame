@@ -6,8 +6,10 @@
 [ext_resource type="FontFile" uid="uid://cn1i4gg7fwr82" path="res://assets/fonts/PressStart2P-Regular.ttf" id="5_crun1"]
 [ext_resource type="Texture2D" uid="uid://cf6ly4wrfhe8d" path="res://assets/textures/background/game.png" id="5_nvavo"]
 [ext_resource type="Theme" uid="uid://c8k62fruyylkk" path="res://assets/styles/UI/buttons/buttons_style.tres" id="5_sajuh"]
+[ext_resource type="Script" path="res://assets/scripts/Settings.gd" id="8_x253x"]
 [ext_resource type="PackedScene" uid="uid://dxjr13t76wfnf" path="res://assets/scenes/player.tscn" id="9_35m4b"]
-[ext_resource type="AudioStream" uid="uid://crk3qki3jm4ol" path="res://assets/audio/Music/MainMenu.ogg" id="10_stdvb"]
+[ext_resource type="LabelSettings" uid="uid://daf6ufyfqwogr" path="res://assets/styles/UI/buttons/Font_Settings.tres" id="9_d87p1"]
+[ext_resource type="AudioStream" uid="uid://cqkurpi8trn5x" path="res://assets/audio/Music/MainMenu.ogg" id="10_2kmxe"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5rabc"]
 font = ExtResource("5_crun1")
@@ -18,71 +20,11 @@ shadow_size = 6
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(3, 3)
 
-[sub_resource type="GDScript" id="GDScript_31kig"]
-script/source = "extends Control
-
-@onready var MASTER_BUS_ID = AudioServer.get_bus_index(\"Master\")
-@onready var MUSIC_BUS_ID = AudioServer.get_bus_index(\"Music\")
-@onready var SFX_BUS_ID = AudioServer.get_bus_index(\"SFX\")
-
-@onready var SFX_Slider : HSlider = %SFXSlider
-@onready var Music_Slider : HSlider = %MusicSlider
-@onready var Master_Slider : HSlider = %MasterSlider
-
-var limit_value = 0
-
-func _ready():
-	var audio_settings = ConfigFileHandler.load_audio_settings()
-	Master_Slider.value = min(audio_settings.Master, 1.0) * 100
-	limit_value = Master_Slider.value
-	Music_Slider.value = min(audio_settings.Music, 1.0) * 100
-	SFX_Slider.value = min(audio_settings.SFX, 1.0) * 100
-
-func _on_back_button_pressed():
-	self.visible = false
-
-func _on_sfx_slider_value_changed(value):
-	if value >= limit_value:
-		SFX_Slider.value = limit_value
-	else:
-		AudioServer.set_bus_volume_db(SFX_BUS_ID, linear_to_db(value)) 
-		AudioServer.set_bus_mute(SFX_BUS_ID, value < .05)
-
-func _on_music_slider_value_changed(value):
-	if value >= limit_value:
-		Music_Slider.value = limit_value
-	else:
-		AudioServer.set_bus_volume_db(MUSIC_BUS_ID, linear_to_db(value)) 
-		AudioServer.set_bus_mute(MUSIC_BUS_ID, value < .05)
-
-func _on_master_slider_value_changed(value):
-	Music_Slider.value = min(Music_Slider.value, value)
-	SFX_Slider.value = min(SFX_Slider.value, value)
-	limit_value = value
-
-func _on_music_slider_drag_ended(value_changed):
-	if value_changed:
-		ConfigFileHandler.save_audio_settings(\"Music\", Music_Slider.value / 100)
-
-func _on_sfx_slider_drag_ended(value_changed):
-	if value_changed:
-		ConfigFileHandler.save_audio_settings(\"SFX\", SFX_Slider.value / 100)
-
-func _on_master_slider_drag_ended(value_changed):
-	if value_changed:
-		ConfigFileHandler.save_audio_settings(\"Master\", Master_Slider.value / 100)
-"
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2s4bx"]
 bg_color = Color(0.225531, 0.633723, 0.907049, 1)
 
 [sub_resource type="Theme" id="Theme_7v3hj"]
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_2s4bx")
-
-[sub_resource type="LabelSettings" id="LabelSettings_fucco"]
-font = ExtResource("5_crun1")
-font_size = 19
-outline_color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -92,7 +34,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-metadata/_edit_use_anchors_ = true
 
 [node name="Menu" type="Control" parent="."]
 layout_mode = 1
@@ -102,7 +43,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_t1k4e")
-metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="Menu"]
 layout_mode = 1
@@ -131,16 +71,15 @@ texture = ExtResource("3_cbvft")
 
 [node name="windows" type="TextureRect" parent="Menu/MarginContainer2/background"]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.96
-offset_top = -40.0
-offset_bottom = 15.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 texture = ExtResource("4_becp2")
+stretch_mode = 5
 
 [node name="MarginContainer" type="MarginContainer" parent="Menu"]
 layout_mode = 1
@@ -150,18 +89,19 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -135.5
-offset_top = -96.5
+offset_top = -130.0
 offset_right = 135.5
-offset_bottom = 96.5
+offset_bottom = 130.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
+size_flags_vertical = 4
+theme_override_constants/separation = 7
 
 [node name="Play" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -169,13 +109,31 @@ theme = ExtResource("5_sajuh")
 text = "Играть"
 
 [node name="Settings" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("5_sajuh")
 text = "Настройки"
 
+[node name="LeaderBoard" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("5_sajuh")
+text = "Доска лидеров"
+
+[node name="About" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("5_sajuh")
+text = "Благодарности"
+
 [node name="Exit" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -211,10 +169,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = SubResource("GDScript_31kig")
+script = ExtResource("8_x253x")
 metadata/_edit_use_anchors_ = true
 
-[node name="PanelContainer" type="ColorRect" parent="Settings"]
+[node name="ColorRect" type="ColorRect" parent="Settings"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -224,7 +182,7 @@ grow_vertical = 2
 theme = SubResource("Theme_7v3hj")
 color = Color(0.885736, 0.708127, 0.534308, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="Settings/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Settings/ColorRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -236,23 +194,23 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/ColorRect/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="GridContainer" type="GridContainer" parent="Settings/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="Settings/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 50
 theme_override_constants/v_separation = 30
 columns = 2
 
-[node name="MasterLabel" type="Label" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="MasterLabel" type="Label" parent="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Громкость игры:"
-label_settings = SubResource("LabelSettings_fucco")
+label_settings = ExtResource("9_d87p1")
 
-[node name="MasterSlider" type="HSlider" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="MasterSlider" type="HSlider" parent="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 modulate = Color(0.976471, 0.639216, 0, 1)
 self_modulate = Color(0.976471, 0.639216, 0, 1)
@@ -260,12 +218,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 
-[node name="MusicLabel" type="Label" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="MusicLabel" type="Label" parent="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Громкость музыки:"
-label_settings = SubResource("LabelSettings_fucco")
+label_settings = ExtResource("9_d87p1")
 
-[node name="MusicSlider" type="HSlider" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="MusicSlider" type="HSlider" parent="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 modulate = Color(0.976471, 0.639216, 0, 1)
 self_modulate = Color(0.976471, 0.639216, 0, 1)
@@ -274,14 +232,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 ticks_on_borders = true
 
-[node name="SFXLabel" type="Label" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="SFXLabel" type="Label" parent="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 text = "Громкость звуковых эффектов:"
-label_settings = SubResource("LabelSettings_fucco")
+label_settings = ExtResource("9_d87p1")
 autowrap_mode = 2
 
-[node name="SFXSlider" type="HSlider" parent="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="SFXSlider" type="HSlider" parent="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 modulate = Color(0.975352, 0.639208, 7.70092e-07, 1)
 self_modulate = Color(0.976471, 0.639216, 0, 1)
@@ -290,22 +248,27 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 rounded = true
 
-[node name="BackButton" type="Button" parent="Settings"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 44.0
-offset_top = -130.0
-offset_right = 366.0
-offset_bottom = -63.0
-grow_vertical = 0
+[node name="MuteLabel" type="Label" parent="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Отключить звук"
+label_settings = ExtResource("9_d87p1")
+
+[node name="CheckBox" type="CheckBox" parent="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="BackButton" type="Button" parent="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 10
 theme = ExtResource("5_sajuh")
 text = "Назад"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_stdvb")
+stream = ExtResource("10_2kmxe")
 volume_db = -30.0
 autoplay = true
 bus = &"Music"
@@ -315,11 +278,14 @@ anchor_mode = 0
 
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Play" to="Menu" method="_on_play_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Settings" to="Menu" method="_on_settings_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/LeaderBoard" to="Menu" method="_on_leader_board_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/About" to="Menu" method="_on_about_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Exit" to="Menu" method="_on_exit_pressed"]
-[connection signal="drag_ended" from="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer/MasterSlider" to="Settings" method="_on_master_slider_drag_ended"]
-[connection signal="value_changed" from="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer/MasterSlider" to="Settings" method="_on_master_slider_value_changed"]
-[connection signal="drag_ended" from="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="Settings" method="_on_music_slider_drag_ended"]
-[connection signal="value_changed" from="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="Settings" method="_on_music_slider_value_changed"]
-[connection signal="drag_ended" from="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer/SFXSlider" to="Settings" method="_on_sfx_slider_drag_ended"]
-[connection signal="value_changed" from="Settings/PanelContainer/MarginContainer/VBoxContainer/GridContainer/SFXSlider" to="Settings" method="_on_sfx_slider_value_changed"]
-[connection signal="pressed" from="Settings/BackButton" to="Settings" method="_on_back_button_pressed"]
+[connection signal="drag_ended" from="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer/MasterSlider" to="Settings" method="_on_master_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer/MasterSlider" to="Settings" method="_on_master_slider_value_changed"]
+[connection signal="drag_ended" from="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="Settings" method="_on_music_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="Settings" method="_on_music_slider_value_changed"]
+[connection signal="drag_ended" from="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer/SFXSlider" to="Settings" method="_on_sfx_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer/SFXSlider" to="Settings" method="_on_sfx_slider_value_changed"]
+[connection signal="toggled" from="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer/CheckBox" to="Settings" method="_on_check_box_toggled"]
+[connection signal="pressed" from="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer/BackButton" to="Settings" method="_on_back_button_pressed"]

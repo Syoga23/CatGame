@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://daf6ufyfqwogr"]
+
+[ext_resource type="FontFile" uid="uid://cn1i4gg7fwr82" path="res://assets/fonts/PressStart2P-Regular.ttf" id="1_yketx"]
+
+[resource]
+font = ExtResource("1_yketx")
+font_size = 32
+outline_color = Color(0, 0, 0, 1)

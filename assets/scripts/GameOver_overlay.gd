@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var Score : Label = %ScoreLabel
 @onready var Score_Death : Label = %ScoreLabel_Death
 # Called when the node enters the scene tree for the first time.
+
 func _ready():
 	self.hide()
 

@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://n016p0c7wrcp"]
+
+[ext_resource type="Script" path="res://assets/scripts/party_room.gd" id="1_m0xis"]
+[ext_resource type="PackedScene" uid="uid://wf4blj7mwku" path="res://assets/scenes/steak_ball.tscn" id="2_3qjwn"]
+[ext_resource type="PackedScene" uid="uid://vg2ky15lwejr" path="res://assets/scenes/line_wall.tscn" id="3_m4cyy"]
+[ext_resource type="Texture2D" uid="uid://ck8yt6axebhfx" path="res://assets/textures/Party/office.jpg" id="4_mp38f"]
+[ext_resource type="Script" path="res://assets/scripts/BG_party.gd" id="5_llwhq"]
+[ext_resource type="PackedScene" uid="uid://btplohu28tl1f" path="res://assets/scenes/confetti.tscn" id="6_fgf6h"]
+
+[node name="PartyRoom" type="Node2D"]
+script = ExtResource("1_m0xis")
+steak = ExtResource("2_3qjwn")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="WallLeft" parent="." instance=ExtResource("3_m4cyy")]
+unique_name_in_owner = true
+scale = Vector2(4, 600)
+
+[node name="WallBottom" parent="." instance=ExtResource("3_m4cyy")]
+unique_name_in_owner = true
+scale = Vector2(960, -1)
+
+[node name="WallRight" parent="." instance=ExtResource("3_m4cyy")]
+unique_name_in_owner = true
+scale = Vector2(-1, 1200)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+anchor_mode = 0
+
+[node name="BG_Party" type="Sprite2D" parent="."]
+position = Vector2(10, 10)
+scale = Vector2(0.999565, 1.0026)
+texture = ExtResource("4_mp38f")
+centered = false
+script = ExtResource("5_llwhq")
+
+[node name="Confetti" parent="." instance=ExtResource("6_fgf6h")]
+position = Vector2(0, 850)
+rotation = 0.785398
+
+[node name="Confetti2" parent="." instance=ExtResource("6_fgf6h")]
+position = Vector2(1200, 850)
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
