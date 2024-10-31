@@ -1,17 +1,177 @@
-[gd_scene load_steps=7 format=3 uid="uid://n016p0c7wrcp"]
+[gd_scene load_steps=14 format=3 uid="uid://n016p0c7wrcp"]
 
 [ext_resource type="Script" path="res://assets/scripts/party_room.gd" id="1_m0xis"]
 [ext_resource type="PackedScene" uid="uid://wf4blj7mwku" path="res://assets/scenes/steak_ball.tscn" id="2_3qjwn"]
+[ext_resource type="LabelSettings" uid="uid://daf6ufyfqwogr" path="res://assets/styles/UI/buttons/Font_Settings.tres" id="3_72j6a"]
 [ext_resource type="PackedScene" uid="uid://vg2ky15lwejr" path="res://assets/scenes/line_wall.tscn" id="3_m4cyy"]
 [ext_resource type="Texture2D" uid="uid://ck8yt6axebhfx" path="res://assets/textures/Party/office.jpg" id="4_mp38f"]
+[ext_resource type="Script" path="res://assets/scenes/aital.gd" id="4_uw7vl"]
+[ext_resource type="FontFile" uid="uid://cn1i4gg7fwr82" path="res://assets/fonts/PressStart2P-Regular.ttf" id="4_v2b71"]
 [ext_resource type="Script" path="res://assets/scripts/BG_party.gd" id="5_llwhq"]
 [ext_resource type="PackedScene" uid="uid://btplohu28tl1f" path="res://assets/scenes/confetti.tscn" id="6_fgf6h"]
+[ext_resource type="AudioStream" uid="uid://dkiledwau3qkk" path="res://assets/audio/Music/Game Theory Remix.mp3" id="8_fqaji"]
+
+[sub_resource type="Animation" id="Animation_qupb6"]
+resource_name = "Credits"
+
+[sub_resource type="Animation" id="Animation_dt08a"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x2iii"]
+_data = {
+"Credits": SubResource("Animation_qupb6"),
+"RESET": SubResource("Animation_dt08a")
+}
 
 [node name="PartyRoom" type="Node2D"]
 script = ExtResource("1_m0xis")
 steak = ExtResource("2_3qjwn")
 
+[node name="CreditsAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../UI")
+libraries = {
+"": SubResource("AnimationLibrary_x2iii")
+}
+
 [node name="UI" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="MainTitle" type="Label" parent="UI/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Работали над игрой:"
+label_settings = ExtResource("3_72j6a")
+
+[node name="HBoxContainer" type="GridContainer" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="DevTitle" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Программист:"
+label_settings = ExtResource("3_72j6a")
+horizontal_alignment = 1
+
+[node name="ArtistTitle" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Художник:"
+label_settings = ExtResource("3_72j6a")
+horizontal_alignment = 1
+
+[node name="Dev" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "steakbla(Сергей)"
+label_settings = ExtResource("3_72j6a")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Artist" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "corrinтj(Тома)"
+label_settings = ExtResource("3_72j6a")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MaxTitle" type="Label" parent="UI/MarginContainer/VBoxContainer/VBoxContainer"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Ментор и тестировщик:"
+label_settings = ExtResource("3_72j6a")
+horizontal_alignment = 1
+
+[node name="Max" type="Label" parent="UI/MarginContainer/VBoxContainer/VBoxContainer"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "cypherco(Максим)"
+label_settings = ExtResource("3_72j6a")
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="OthersTitle" type="Label" parent="UI/MarginContainer/VBoxContainer/VBoxContainer2"]
+modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(400, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Отдельные благодарности за моральную поддержку и идеи для проекта:"
+label_settings = ExtResource("3_72j6a")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Aital" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/VBoxContainer2"]
+clip_contents = false
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("4_v2b71")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+scroll_active = false
+autowrap_mode = 2
+script = ExtResource("4_uw7vl")
+
+[node name="Egor" type="Label" parent="UI/MarginContainer/VBoxContainer/VBoxContainer2"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "doreahod(Егор)"
+label_settings = ExtResource("3_72j6a")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="UI/MarginContainer/VBoxContainer/VBoxContainer2"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "weezingd(Аня)"
+label_settings = ExtResource("3_72j6a")
+horizontal_alignment = 1
 
 [node name="WallLeft" parent="." instance=ExtResource("3_m4cyy")]
 unique_name_in_owner = true
@@ -30,8 +190,8 @@ unique_name_in_owner = true
 anchor_mode = 0
 
 [node name="BG_Party" type="Sprite2D" parent="."]
-position = Vector2(10, 10)
-scale = Vector2(0.999565, 1.0026)
+unique_name_in_owner = true
+scale = Vector2(0.2, 0.651)
 texture = ExtResource("4_mp38f")
 centered = false
 script = ExtResource("5_llwhq")
@@ -42,5 +202,18 @@ rotation = 0.785398
 
 [node name="Confetti2" parent="." instance=ExtResource("6_fgf6h")]
 position = Vector2(1200, 850)
+rotation = -0.785398
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_fqaji")
+volume_db = -35.0
+autoplay = true
+bus = &"Music"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 34.0
+one_shot = true
+autostart = true
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
