@@ -21,7 +21,6 @@ func _input(event):
 			_on_pause_button_pressed() 
 		else:
 			_on_continue_pressed()
-		print("KIK")
 
 
 func _on_exit_pressed() -> void:

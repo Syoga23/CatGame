@@ -19,16 +19,15 @@ func _process(_delta):
 	if Score >= 100:
 		#medium
 		change_level(1)
-	if Score >= 200:
+	if Score >= 1000:
 		#hard
 		change_level(2)
-	if Score >= 300:
+	if Score >= 2000:
 		#infinite
 		change_level(3)
 
 func change_level(level_no : int):
-	food_order = []
-	
+	food_order.clear()
 	for key in levels:
 		if (key["level"] == level_no && key["locked"] ==  true):
 			return
@@ -42,7 +41,7 @@ func change_level(level_no : int):
 	for x in range(food_arr_size):
 		foods[x]["fall_speed"] += levels[level]["fall_speed_modifier"]
 	EventBus.food_gen_timer.emit(levels[level]["timer_delay"])
-	for x in levels[level]["food_types"].size():
+	for x in range(levels[level]["food_types"].size()):
 		food_order.append(levels[level]["food_types"][x])
 	EventBus.food_gen_order.emit(level)
 

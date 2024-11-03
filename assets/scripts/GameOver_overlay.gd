@@ -26,6 +26,11 @@ func on_game_over():
 	get_tree().paused = true
 	self.show()
 
+func _on_records_button_pressed() -> void:
+	get_tree().paused = false
+	LbModule.active_score = true
+	get_tree().change_scene_to_file("res://assets/scenes/leaderboards.tscn")
+
 func _on_tree_entered():
 	EventBus.game_over.connect(on_game_over)
 

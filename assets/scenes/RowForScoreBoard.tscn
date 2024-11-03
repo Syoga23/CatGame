@@ -3,7 +3,7 @@
 [ext_resource type="StyleBox" uid="uid://bi762oxpabqfs" path="res://assets/styles/UI/ScoreBoard/RowForScoreBoard.tres" id="1_fe4sj"]
 [ext_resource type="LabelSettings" uid="uid://daf6ufyfqwogr" path="res://assets/styles/UI/buttons/Font_Settings.tres" id="2_oiebp"]
 
-[node name="RowPanel" type="HBoxContainer"]
+[node name="RowHBox" type="HBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 offset_right = 800.0
 offset_bottom = 23.0

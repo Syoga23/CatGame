@@ -89,9 +89,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -135.5
-offset_top = -130.0
+offset_top = -110.5
 offset_right = 135.5
-offset_bottom = 130.0
+offset_bottom = 110.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -131,14 +131,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("5_sajuh")
 text = "Благодарности"
-
-[node name="Exit" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("5_sajuh")
-text = "Выйти"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -189,10 +181,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Settings/ColorRect/MarginContainer"]
 layout_mode = 2
@@ -259,12 +251,16 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="BackButton" type="Button" parent="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer"]
-custom_minimum_size = Vector2(0, 120)
+[node name="HBoxContainer" type="CenterContainer" parent="Settings/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+
+[node name="BackButton" type="Button" parent="Settings/ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 100)
+layout_mode = 2
 size_flags_vertical = 10
 theme = ExtResource("5_sajuh")
+theme_override_fonts/font = ExtResource("5_crun1")
+theme_override_font_sizes/font_size = 23
 text = "Назад"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -280,7 +276,6 @@ anchor_mode = 0
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Settings" to="Menu" method="_on_settings_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/LeaderBoard" to="Menu" method="_on_leader_board_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/About" to="Menu" method="_on_about_pressed"]
-[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Exit" to="Menu" method="_on_exit_pressed"]
 [connection signal="drag_ended" from="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer/MasterSlider" to="Settings" method="_on_master_slider_drag_ended"]
 [connection signal="value_changed" from="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer/MasterSlider" to="Settings" method="_on_master_slider_value_changed"]
 [connection signal="drag_ended" from="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="Settings" method="_on_music_slider_drag_ended"]
@@ -288,4 +283,4 @@ anchor_mode = 0
 [connection signal="drag_ended" from="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer/SFXSlider" to="Settings" method="_on_sfx_slider_drag_ended"]
 [connection signal="value_changed" from="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer/SFXSlider" to="Settings" method="_on_sfx_slider_value_changed"]
 [connection signal="toggled" from="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer/CheckBox" to="Settings" method="_on_check_box_toggled"]
-[connection signal="pressed" from="Settings/ColorRect/MarginContainer/VBoxContainer/GridContainer/BackButton" to="Settings" method="_on_back_button_pressed"]
+[connection signal="pressed" from="Settings/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="Settings" method="_on_back_button_pressed"]

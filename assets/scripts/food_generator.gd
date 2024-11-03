@@ -43,7 +43,7 @@ func change_timer_delay(time: float):
 func _on_timer_timeout():
 	#bug with out of bounds
 	#Out of bounds get index '6' (on base: 'Array')
-	for x in spawn_food.size():
+	for x in range(spawn_food.size()):
 		#print(x, " ", spawn_food.size())
 		generate_food(spawn_food[x])
 		await get_tree().create_timer(randf() * 0.25).timeout 

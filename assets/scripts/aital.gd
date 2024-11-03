@@ -5,7 +5,7 @@ var current_index: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	self.text = "sherilbi(Айтал)"
+	self.text = "[center]sherilbi(Айтал)[/center]"
 	self.modulate = Color(1,1,0)
 	
 func _process(delta: float) -> void:
@@ -21,7 +21,7 @@ func _input(event):
 			if current_index == key_sequence.size():
 				# Сработало событие
 				self.modulate = Color(1,1,1)
-				self.text = "[wave amp=120,freq=5][rainbow freq=0.4,sat=0.8,val=0.9]sherilbi(Айтал)[/rainbow][/wave]"
+				self.text = "[center][wave amp=120,freq=5][rainbow freq=0.4,sat=0.8,val=0.9]sherilbi(Айтал)[/rainbow][/wave][/center]"
 				current_index = 0  # Сброс индекса
 		else:
 			current_index = 0  # Сброс индекса, если последовательность прервана

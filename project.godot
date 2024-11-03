@@ -26,6 +26,7 @@ LbModule="*res://assets/singletones/LB_Module.gd"
 
 window/size/viewport_width=800
 window/size/viewport_height=1000
+window/size/mode=3
 window/size/resizable=false
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
@@ -33,7 +34,6 @@ window/handheld/orientation=1
 
 [filesystem]
 
-import/blender/enabled=false
 import/fbx/enabled=false
 
 [input]

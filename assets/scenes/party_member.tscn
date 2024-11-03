@@ -1,0 +1,111 @@
+[gd_scene load_steps=9 format=3 uid="uid://n4v4cfd3i33m"]
+
+[ext_resource type="Texture2D" uid="uid://cgum305p83i2o" path="res://assets/textures/player/body/cat_sprite1.png" id="1_e2jx0"]
+[ext_resource type="Texture2D" uid="uid://dhvy7xhds0at3" path="res://assets/textures/player/body/cat_sprite2.png" id="2_66f8c"]
+[ext_resource type="Texture2D" uid="uid://dw56jug6iitpy" path="res://assets/textures/player/Basis/Basis.png" id="3_70f5r"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_13t4e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e2jx0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_66f8c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fc4jx"]
+radius = 5.0
+height = 12.0
+
+[sub_resource type="Animation" id="Animation_gdla1"]
+resource_name = "Dance"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScanBox/AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.295776, 0.0, -0.296706, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScanBox/AnimatedSprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_jx7sn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScanBox/AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.295776]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScanBox/AnimatedSprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y266w"]
+_data = {
+"Dance": SubResource("Animation_gdla1"),
+"RESET": SubResource("Animation_jx7sn")
+}
+
+[node name="Party_Member" type="Node2D"]
+
+[node name="ScanBox" type="Area2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ScanBox"]
+rotation = 0.295776
+sprite_frames = SubResource("SpriteFrames_13t4e")
+autoplay = "default"
+frame_progress = 0.673325
+
+[node name="Sprite2D" type="Sprite2D" parent="ScanBox/AnimatedSprite2D"]
+visible = false
+modulate = Color(1, 1, 1, 0.411765)
+position = Vector2(0, 0.75)
+scale = Vector2(0.714, 0.965)
+texture = ExtResource("3_70f5r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScanBox"]
+position = Vector2(-3, -3)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_fc4jx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_y266w")
+}

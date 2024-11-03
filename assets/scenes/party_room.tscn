@@ -5,7 +5,7 @@
 [ext_resource type="LabelSettings" uid="uid://daf6ufyfqwogr" path="res://assets/styles/UI/buttons/Font_Settings.tres" id="3_72j6a"]
 [ext_resource type="PackedScene" uid="uid://vg2ky15lwejr" path="res://assets/scenes/line_wall.tscn" id="3_m4cyy"]
 [ext_resource type="Texture2D" uid="uid://ck8yt6axebhfx" path="res://assets/textures/Party/office.jpg" id="4_mp38f"]
-[ext_resource type="Script" path="res://assets/scenes/aital.gd" id="4_uw7vl"]
+[ext_resource type="Script" path="res://assets/scripts/aital.gd" id="4_uw7vl"]
 [ext_resource type="FontFile" uid="uid://cn1i4gg7fwr82" path="res://assets/fonts/PressStart2P-Regular.ttf" id="4_v2b71"]
 [ext_resource type="Script" path="res://assets/scripts/BG_party.gd" id="5_llwhq"]
 [ext_resource type="PackedScene" uid="uid://btplohu28tl1f" path="res://assets/scenes/confetti.tscn" id="6_fgf6h"]
@@ -146,7 +146,6 @@ autowrap_mode = 2
 clip_contents = false
 custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("4_v2b71")
 theme_override_font_sizes/normal_font_size = 32
@@ -191,7 +190,7 @@ anchor_mode = 0
 
 [node name="BG_Party" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-scale = Vector2(0.2, 0.651)
+scale = Vector2(0.347675, 0.651)
 texture = ExtResource("4_mp38f")
 centered = false
 script = ExtResource("5_llwhq")

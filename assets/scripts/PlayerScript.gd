@@ -80,6 +80,7 @@ func food_eaten(saturation: int, score_points: int):
 	BodySprite.play("Bite")
 	EventBus.health_changed.emit(HealthPoints)
 	EventBus.score_changed.emit(Score)
+	LbModule.score = Score
 
 func player_death():
 	EventBus.game_over.emit()

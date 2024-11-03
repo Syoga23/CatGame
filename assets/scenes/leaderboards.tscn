@@ -1,11 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6ksa33rodxei"]
+[gd_scene load_steps=14 format=3 uid="uid://c6ksa33rodxei"]
 
 [ext_resource type="LabelSettings" uid="uid://daf6ufyfqwogr" path="res://assets/styles/UI/buttons/Font_Settings.tres" id="1_lu3px"]
 [ext_resource type="Script" path="res://assets/leaderboards.gd" id="1_wlshn"]
 [ext_resource type="StyleBox" uid="uid://bi762oxpabqfs" path="res://assets/styles/UI/ScoreBoard/RowForScoreBoard.tres" id="2_yt7qu"]
+[ext_resource type="Texture2D" uid="uid://b853g8qqh6ns1" path="res://assets/textures/UI/refresh/Refresh.png" id="4_uychl"]
 [ext_resource type="Theme" uid="uid://c8k62fruyylkk" path="res://assets/styles/UI/buttons/buttons_style.tres" id="4_yenfl"]
+[ext_resource type="Script" path="res://assets/scripts/texture_rect.gd" id="5_2d7lg"]
 [ext_resource type="FontFile" uid="uid://cn1i4gg7fwr82" path="res://assets/fonts/PressStart2P-Regular.ttf" id="5_di2o8"]
 [ext_resource type="Texture2D" uid="uid://d3j0e46hln73e" path="res://assets/textures/UI/buttons/refresh.png" id="6_qwjdb"]
+[ext_resource type="Script" path="res://assets/scripts/score_label.gd" id="7_012ql"]
+[ext_resource type="Script" path="res://assets/scripts/record_description.gd" id="8_dk3w6"]
+[ext_resource type="Script" path="res://assets/scripts/rewrite_button.gd" id="9_d1uy8"]
+[ext_resource type="Script" path="res://assets/scripts/label.gd" id="11_7q73n"]
 
 [sub_resource type="Theme" id="Theme_3a6kf"]
 
@@ -35,10 +41,28 @@ theme_override_styles/panel = ExtResource("2_yt7qu")
 
 [node name="Label" type="Label" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
 text = "Доска лидеров"
 label_settings = ExtResource("1_lu3px")
 uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="RefreshStatus" type="TextureRect" parent="VBoxContainer/PanelContainer/HBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("4_uychl")
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("5_2d7lg")
 
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
 layout_mode = 2
@@ -70,17 +94,19 @@ theme_override_constants/separation = 1
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 0
+focus_mode = 1
 theme = SubResource("Theme_3a6kf")
 theme_override_styles/panel = ExtResource("2_yt7qu")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2"]
-layout_mode = 2
-
-[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/PanelContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ToMenu" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/CenterContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ToMenu" type="Button" parent="VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer"]
 custom_minimum_size = Vector2(250, 65)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -89,11 +115,16 @@ theme_override_fonts/font = ExtResource("5_di2o8")
 theme_override_font_sizes/font_size = 22
 text = "В меню"
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer"]
+[node name="ChangeName" type="Button" parent="VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 65)
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("4_yenfl")
+theme_override_fonts/font = ExtResource("5_di2o8")
+theme_override_font_sizes/font_size = 22
+text = "Поменять имя"
 
-[node name="Refresh" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/CenterContainer"]
+[node name="Refresh" type="Button" parent="VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer"]
 custom_minimum_size = Vector2(250, 65)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -104,5 +135,127 @@ icon = ExtResource("6_qwjdb")
 icon_alignment = 1
 expand_icon = true
 
-[connection signal="pressed" from="VBoxContainer/PanelContainer2/HBoxContainer/CenterContainer2/ToMenu" to="." method="_on_to_menu_pressed"]
-[connection signal="pressed" from="VBoxContainer/PanelContainer2/HBoxContainer/CenterContainer/Refresh" to="." method="_on_refresh_pressed"]
+[node name="SubmitUI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="ColorRect" type="ColorRect" parent="SubmitUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.607843)
+
+[node name="MarginContainer" type="MarginContainer" parent="SubmitUI/ColorRect"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -159.0
+offset_right = 17.0
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubmitUI/ColorRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="ScoreLabel" type="Label" parent="SubmitUI/ColorRect/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(600, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Ваш счет:"
+label_settings = ExtResource("1_lu3px")
+horizontal_alignment = 1
+autowrap_mode = 2
+uppercase = true
+script = ExtResource("7_012ql")
+
+[node name="RecordDescription" type="Label" parent="SubmitUI/ColorRect/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 70)
+layout_mode = 2
+text = "Введите имя для своего рекорда:"
+label_settings = ExtResource("1_lu3px")
+horizontal_alignment = 1
+autowrap_mode = 2
+script = ExtResource("8_dk3w6")
+
+[node name="DangerText" type="Label" parent="SubmitUI/ColorRect/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.436058, 8.66354e-07, 1.68458e-07, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("5_di2o8")
+theme_override_font_sizes/font_size = 18
+text = "Ваш старый рекорд будет перезаписан!!!"
+horizontal_alignment = 1
+script = ExtResource("11_7q73n")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubmitUI/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="CenterContainer2" type="CenterContainer" parent="SubmitUI/ColorRect/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="HBoxContainer" parent="SubmitUI/ColorRect/MarginContainer/VBoxContainer/VBoxContainer/CenterContainer2"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NicknameEdit" type="LineEdit" parent="SubmitUI/ColorRect/MarginContainer/VBoxContainer/VBoxContainer/CenterContainer2/CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("5_di2o8")
+theme_override_font_sizes/font_size = 20
+placeholder_text = "Псевдоним"
+alignment = 1
+max_length = 30
+expand_to_text_length = true
+clear_button_enabled = true
+
+[node name="RewriteButton" type="Button" parent="SubmitUI/ColorRect/MarginContainer/VBoxContainer/VBoxContainer/CenterContainer2/CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("4_yenfl")
+theme_override_fonts/font = ExtResource("5_di2o8")
+theme_override_font_sizes/font_size = 18
+text = "Перезаписать счет
+"
+autowrap_mode = 3
+script = ExtResource("9_d1uy8")
+
+[node name="CenterContainer3" type="CenterContainer" parent="SubmitUI/ColorRect/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Cancel Button" type="Button" parent="SubmitUI/ColorRect/MarginContainer/VBoxContainer/VBoxContainer/CenterContainer3"]
+custom_minimum_size = Vector2(220, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("4_yenfl")
+theme_override_fonts/font = ExtResource("5_di2o8")
+theme_override_font_sizes/font_size = 18
+text = "Отмена
+"
+autowrap_mode = 3
+
+[connection signal="pressed" from="VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer/ToMenu" to="." method="_on_to_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer/ChangeName" to="." method="_on_change_name_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer/Refresh" to="." method="_on_refresh_pressed"]
+[connection signal="pressed" from="SubmitUI/ColorRect/MarginContainer/VBoxContainer/VBoxContainer/CenterContainer2/CenterContainer/RewriteButton" to="." method="_on_rewrite_button_pressed"]
+[connection signal="pressed" from="SubmitUI/ColorRect/MarginContainer/VBoxContainer/VBoxContainer/CenterContainer3/Cancel Button" to="." method="_on_cancel_button_pressed"]

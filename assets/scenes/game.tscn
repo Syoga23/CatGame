@@ -19,13 +19,13 @@
 [ext_resource type="StyleBox" uid="uid://xusyg0pwk1b6" path="res://assets/styles/UI/buttons/new_style_box_texture.tres" id="14_w3w8h"]
 [ext_resource type="AudioStream" uid="uid://b6cwahk0dpg1e" path="res://assets/audio/Sound/Game_Over.wav" id="15_fll8r"]
 [ext_resource type="AudioStream" uid="uid://bp21jul4pnw6" path="res://assets/audio/Music/Game.mp3" id="16_mw7bp"]
-[ext_resource type="Texture2D" uid="uid://bhmrjbxsc8n1j" path="res://assets/textures/UI/buttons/sound_on.png" id="19_lnfb3"]
+[ext_resource type="Texture2D" uid="uid://m0uwyns2mtk6" path="res://assets/textures/UI/buttons/sound_on.png" id="19_lnfb3"]
 [ext_resource type="Script" path="res://assets/scripts/pause.gd" id="20_f3kes"]
 [ext_resource type="Script" path="res://assets/scripts/sound_button.gd" id="22_7o2rl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xseuy"]
 font = ExtResource("11_rlmbe")
-font_size = 30
+font_size = 28
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
@@ -33,7 +33,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_u2xba"]
 font = ExtResource("11_rlmbe")
-font_size = 50
+font_size = 45
 font_color = Color(1, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ai1mm"]
@@ -161,7 +161,6 @@ script = ExtResource("14_27kap")
 anchor_mode = 0
 
 [node name="GameOver" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("13_afsts")
 
 [node name="ColorRect" type="ColorRect" parent="GameOver"]
@@ -182,17 +181,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -255.0
-offset_top = -142.5
-offset_right = 255.0
-offset_bottom = 142.5
+offset_left = -380.0
+offset_top = -185.0
+offset_right = 380.0
+offset_bottom = 103.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 
 [node name="VBoxButtons" type="VBoxContainer" parent="GameOver/ColorRect/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 10
 
 [node name="GameOverButton" type="Label" parent="GameOver/ColorRect/MarginContainer/VBoxButtons"]
 layout_mode = 2
@@ -205,38 +204,58 @@ horizontal_alignment = 1
 [node name="ScoreLabel_Death" type="Label" parent="GameOver/ColorRect/MarginContainer/VBoxButtons"]
 unique_name_in_owner = true
 visibility_layer = 7
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Счет: 0"
 label_settings = SubResource("LabelSettings_xseuy")
 horizontal_alignment = 1
 vertical_alignment = 1
-text_overrun_behavior = 1
+justification_flags = 131
 uppercase = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GameOver/ColorRect/MarginContainer/VBoxButtons"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 30
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
 
 [node name="QuitMenuButton" type="Button" parent="GameOver/ColorRect/MarginContainer/VBoxButtons/HBoxContainer"]
 process_mode = 3
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 theme = ExtResource("14_351wk")
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("11_rlmbe")
+theme_override_font_sizes/font_size = 18
 text = "Выйти в меню
 "
 
 [node name="PlayAgainButton" type="Button" parent="GameOver/ColorRect/MarginContainer/VBoxButtons/HBoxContainer"]
 process_mode = 3
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 theme = ExtResource("14_351wk")
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("11_rlmbe")
+theme_override_font_sizes/font_size = 18
 theme_override_styles/hover = ExtResource("14_w3w8h")
 theme_override_styles/pressed = ExtResource("14_w3w8h")
 theme_override_styles/normal = ExtResource("14_w3w8h")
 text = "Играть заново"
+
+[node name="RecordsButton" type="Button" parent="GameOver/ColorRect/MarginContainer/VBoxButtons"]
+process_mode = 3
+custom_minimum_size = Vector2(450, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("14_351wk")
+theme_override_fonts/font = ExtResource("11_rlmbe")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/hover = ExtResource("14_w3w8h")
+theme_override_styles/pressed = ExtResource("14_w3w8h")
+theme_override_styles/normal = ExtResource("14_w3w8h")
+text = "Рекорды"
 
 [node name="GameOver" type="AudioStreamPlayer" parent="GameOver"]
 process_mode = 3
@@ -253,6 +272,7 @@ bus = &"Music"
 [node name="Pause" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 script = ExtResource("20_f3kes")
 
 [node name="ColorRect" type="ColorRect" parent="Pause"]
@@ -352,6 +372,7 @@ clip_text = true
 [connection signal="tree_exiting" from="GameOver" to="GameOver" method="_on_tree_exiting"]
 [connection signal="pressed" from="GameOver/ColorRect/MarginContainer/VBoxButtons/HBoxContainer/QuitMenuButton" to="GameOver" method="_on_quit_menu_button_pressed"]
 [connection signal="pressed" from="GameOver/ColorRect/MarginContainer/VBoxButtons/HBoxContainer/PlayAgainButton" to="GameOver" method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="GameOver/ColorRect/MarginContainer/VBoxButtons/RecordsButton" to="GameOver" method="_on_records_button_pressed"]
 [connection signal="button_down" from="Pause/ColorRect/MarginContainer/Control/SoundButton" to="Pause/ColorRect/MarginContainer/Control/SoundButton" method="_on_button_down"]
 [connection signal="button_up" from="Pause/ColorRect/MarginContainer/Control/SoundButton" to="Pause/ColorRect/MarginContainer/Control/SoundButton" method="_on_button_up"]
 [connection signal="pressed" from="Pause/ColorRect/MarginContainer/Control/SoundButton" to="Pause/ColorRect/MarginContainer/Control/SoundButton" method="_on_pressed"]
