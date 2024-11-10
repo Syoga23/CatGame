@@ -1,8 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://n4v4cfd3i33m"]
+[gd_scene load_steps=11 format=3 uid="uid://n4v4cfd3i33m"]
 
 [ext_resource type="Texture2D" uid="uid://cgum305p83i2o" path="res://assets/textures/player/body/cat_sprite1.png" id="1_e2jx0"]
+[ext_resource type="Shader" path="res://assets/scenes/party_member.gdshader" id="1_hufsh"]
 [ext_resource type="Texture2D" uid="uid://dhvy7xhds0at3" path="res://assets/textures/player/body/cat_sprite2.png" id="2_66f8c"]
 [ext_resource type="Texture2D" uid="uid://dw56jug6iitpy" path="res://assets/textures/player/Basis/Basis.png" id="3_70f5r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sfsm8"]
+shader = ExtResource("1_hufsh")
+shader_parameter/strength = 0.4
+shader_parameter/speed = 2.0
+shader_parameter/angle = 58.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_13t4e"]
 animations = [{
@@ -88,6 +95,7 @@ _data = {
 [node name="ScanBox" type="Area2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ScanBox"]
+material = SubResource("ShaderMaterial_sfsm8")
 rotation = 0.295776
 sprite_frames = SubResource("SpriteFrames_13t4e")
 autoplay = "default"
@@ -96,8 +104,8 @@ frame_progress = 0.673325
 [node name="Sprite2D" type="Sprite2D" parent="ScanBox/AnimatedSprite2D"]
 visible = false
 modulate = Color(1, 1, 1, 0.411765)
-position = Vector2(0, 0.75)
-scale = Vector2(0.714, 0.965)
+position = Vector2(0, -0.233751)
+scale = Vector2(0.714, 1.01299)
 texture = ExtResource("3_70f5r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ScanBox"]
@@ -109,3 +117,4 @@ shape = SubResource("CapsuleShape2D_fc4jx")
 libraries = {
 "": SubResource("AnimationLibrary_y266w")
 }
+autoplay = "Dance"

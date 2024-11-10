@@ -11,7 +11,6 @@ var foods = StaticData.food_data["foods"]
 var found_data = null
 
 func _ready():
-	get_viewport().size = DisplayServer.screen_get_size()
 	change_level(0)
 
 func _process(_delta):

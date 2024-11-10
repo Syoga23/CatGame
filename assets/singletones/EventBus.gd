@@ -1,5 +1,7 @@
 extends Node
 
+var old_vp_size = 0
+
 signal score_changed(score : int)
 signal health_changed(points : int)
 signal game_over()

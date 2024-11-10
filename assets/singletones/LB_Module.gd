@@ -1,8 +1,8 @@
 #LeaderBoard Module 1.0.0 >-<
 extends Node
 
-var game_API_key = "dev_8763ea40456b462b99780235a1edca5c"
-var development_mode = true
+var game_API_key = "prod_17a634daf29b444bac4437f01b7c75ac"
+var development_mode = false
 var leaderboard_key = "7823HECU"
 
 var session_token = ""
@@ -108,7 +108,8 @@ func _on_leaderboard_request_completed(result, response_code, headers, body):
 	
 	var leaderboardFormatted = ""
 
-	if json.get_data().size() > 0:
+	var data = json.get_data()
+	if !(data.has("items") and data["items"] == null):
 		for n in json.get_data().items.size():
 			lb_request = 0
 			rank = json.get_data().items[n].rank
@@ -121,6 +122,8 @@ func _on_leaderboard_request_completed(result, response_code, headers, body):
 	print(output_data)
 
 func _upload_score():
+	if score < 0:
+		score = 0
 	var data = { "score": str(score) }
 	var headers = ["Content-Type: application/json", "x-session-token:"+session_token]
 	submit_score_http = HTTPRequest.new()

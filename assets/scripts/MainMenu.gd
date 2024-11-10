@@ -3,8 +3,9 @@ extends Control
 @onready var settings : Control = %Settings
 
 func _ready():
-	get_viewport().size = DisplayServer.screen_get_size()
 	settings.visible = false
+	#if Viewpo
+	
 
 func _on_exit_pressed():
 	get_tree().quit()

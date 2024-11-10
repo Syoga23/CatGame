@@ -39,10 +39,6 @@ func _process(delta):
 			motion.x -= 1
 			flip_player(false)
 	
-	if Input.is_action_pressed("ui_select"):
-		HealthPoints = 0
-		EventBus.health_changed.emit(HealthPoints)
-	
 	if (HealthPoints <= 0):
 		player_death()
 
@@ -52,7 +48,13 @@ func _process(delta):
 	if Input.is_action_pressed("ui_left"):
 		motion.x -= 1
 		flip_player(false)
-
+	if Input.is_action_pressed("pressed_A"):
+		motion.x -= 1
+		flip_player(false)
+		
+	if Input.is_action_pressed("pressed_D"):
+		motion.x += 1
+		flip_player(true)
 
 	motion = motion.normalized() * Speed * delta * 15
 

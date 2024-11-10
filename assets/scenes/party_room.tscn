@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://n016p0c7wrcp"]
+[gd_scene load_steps=17 format=3 uid="uid://n016p0c7wrcp"]
 
 [ext_resource type="Script" path="res://assets/scripts/party_room.gd" id="1_m0xis"]
 [ext_resource type="PackedScene" uid="uid://wf4blj7mwku" path="res://assets/scenes/steak_ball.tscn" id="2_3qjwn"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" path="res://assets/scripts/BG_party.gd" id="5_llwhq"]
 [ext_resource type="PackedScene" uid="uid://btplohu28tl1f" path="res://assets/scenes/confetti.tscn" id="6_fgf6h"]
 [ext_resource type="AudioStream" uid="uid://dkiledwau3qkk" path="res://assets/audio/Music/Game Theory Remix.mp3" id="8_fqaji"]
+[ext_resource type="PackedScene" uid="uid://n4v4cfd3i33m" path="res://assets/scenes/party_member.tscn" id="11_3vr7g"]
+[ext_resource type="Script" path="res://assets/scenes/party_member.gd" id="12_1qeim"]
 
 [sub_resource type="Animation" id="Animation_qupb6"]
 resource_name = "Credits"
@@ -22,6 +24,13 @@ _data = {
 "Credits": SubResource("Animation_qupb6"),
 "RESET": SubResource("Animation_dt08a")
 }
+
+[sub_resource type="Environment" id="Environment_vlwtd"]
+background_mode = 3
+background_canvas_max_layer = 1
+glow_enabled = true
+glow_intensity = 1.0
+glow_hdr_scale = 1.0
 
 [node name="PartyRoom" type="Node2D"]
 script = ExtResource("1_m0xis")
@@ -52,7 +61,7 @@ layout_mode = 2
 theme_override_constants/separation = 80
 
 [node name="MainTitle" type="Label" parent="UI/MarginContainer/VBoxContainer"]
-modulate = Color(1, 1, 0, 1)
+modulate = Color(2, 2, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -66,7 +75,7 @@ theme_override_constants/v_separation = 10
 columns = 2
 
 [node name="DevTitle" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer"]
-modulate = Color(1, 1, 0, 1)
+modulate = Color(2, 2, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -75,7 +84,7 @@ label_settings = ExtResource("3_72j6a")
 horizontal_alignment = 1
 
 [node name="ArtistTitle" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer"]
-modulate = Color(1, 1, 0, 1)
+modulate = Color(2, 2, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -84,7 +93,7 @@ label_settings = ExtResource("3_72j6a")
 horizontal_alignment = 1
 
 [node name="Dev" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer"]
-modulate = Color(1, 1, 0, 1)
+modulate = Color(2, 2, 0, 1)
 custom_minimum_size = Vector2(300, 40)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -95,7 +104,7 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Artist" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer"]
-modulate = Color(1, 1, 0, 1)
+modulate = Color(2, 2, 0, 1)
 custom_minimum_size = Vector2(300, 40)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -107,23 +116,32 @@ autowrap_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 15
 
-[node name="MaxTitle" type="Label" parent="UI/MarginContainer/VBoxContainer/VBoxContainer"]
-modulate = Color(1, 1, 0, 1)
+[node name="TestersTitle" type="Label" parent="UI/MarginContainer/VBoxContainer/VBoxContainer"]
+modulate = Color(2, 2, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-text = "Ментор и тестировщик:"
+text = "Тестировщики:"
 label_settings = ExtResource("3_72j6a")
 horizontal_alignment = 1
 
 [node name="Max" type="Label" parent="UI/MarginContainer/VBoxContainer/VBoxContainer"]
-modulate = Color(1, 1, 0, 1)
+modulate = Color(2, 2, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "cypherco(Максим)"
+label_settings = ExtResource("3_72j6a")
+horizontal_alignment = 1
+
+[node name="Vadim" type="Label" parent="UI/MarginContainer/VBoxContainer/VBoxContainer"]
+modulate = Color(2, 2, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "leggekam(Вадим)"
 label_settings = ExtResource("3_72j6a")
 horizontal_alignment = 1
 
@@ -132,7 +150,7 @@ layout_mode = 2
 theme_override_constants/separation = 40
 
 [node name="OthersTitle" type="Label" parent="UI/MarginContainer/VBoxContainer/VBoxContainer2"]
-modulate = Color(1, 1, 0, 1)
+modulate = Color(2, 2, 0, 1)
 custom_minimum_size = Vector2(400, 30)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -143,6 +161,7 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Aital" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/VBoxContainer2"]
+modulate = Color(2, 2, 0, 1)
 clip_contents = false
 custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
@@ -155,7 +174,7 @@ autowrap_mode = 2
 script = ExtResource("4_uw7vl")
 
 [node name="Egor" type="Label" parent="UI/MarginContainer/VBoxContainer/VBoxContainer2"]
-modulate = Color(1, 1, 0, 1)
+modulate = Color(2, 2, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -164,7 +183,7 @@ label_settings = ExtResource("3_72j6a")
 horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="UI/MarginContainer/VBoxContainer/VBoxContainer2"]
-modulate = Color(1, 1, 0, 1)
+modulate = Color(2, 2, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -205,7 +224,7 @@ rotation = -0.785398
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_fqaji")
-volume_db = -35.0
+volume_db = -50.0
 autoplay = true
 bus = &"Music"
 
@@ -213,6 +232,15 @@ bus = &"Music"
 wait_time = 34.0
 one_shot = true
 autostart = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vlwtd")
+
+[node name="Party_Member" parent="." instance=ExtResource("11_3vr7g")]
+unique_name_in_owner = true
+position = Vector2(440, 470)
+scale = Vector2(25, 25)
+script = ExtResource("12_1qeim")
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

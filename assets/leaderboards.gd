@@ -65,13 +65,12 @@ func _on_change_name_pressed() -> void:
 func _on_rewrite_button_pressed() -> void:
 	if LbModule.active_score:
 		LbModule._change_player_name(NicknameEdit.text)
+		await get_tree().create_timer(1).timeout 
 		LbModule._upload_score()
 		LbModule.active_score = false
 		update_UI_status()
-		SumbitUI.visible = false
 	if !LbModule.active_score:
 		LbModule._change_player_name(NicknameEdit.text)
-		LbModule._get_player_name()
 	SumbitUI.visible = false
 
 func _on_cancel_button_pressed() -> void:

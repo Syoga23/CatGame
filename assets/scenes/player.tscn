@@ -108,11 +108,12 @@ autostart = true
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="PlayerArea2D"]
 stream = ExtResource("10_kr3yk")
-volume_db = 10.0
+volume_db = -30.0
+bus = &"SFX"
 
 [node name="BiteSound" type="AudioStreamPlayer" parent="PlayerArea2D"]
 stream = ExtResource("11_vtfjj")
-volume_db = -20.0
+volume_db = -30.0
 bus = &"SFX"
 
 [connection signal="animation_finished" from="PlayerArea2D/Body" to="PlayerArea2D" method="_on_cat_animation_finished"]

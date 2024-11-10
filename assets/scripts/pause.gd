@@ -2,6 +2,8 @@ extends CanvasLayer
 
 var is_pause = false
 
+@onready var GameOver = %GameOver
+
 func _ready() -> void:
 	self.hide()
 
@@ -16,11 +18,12 @@ func _on_continue_pressed() -> void:
 	get_tree().paused = false
 
 func _input(event):
-	if event.is_action_pressed("ui_cancel"):  # "ui_cancel" is the default action for Escape
-		if !is_pause:
-			_on_pause_button_pressed() 
-		else:
-			_on_continue_pressed()
+	if event.is_action_pressed("ui_cancel"):  
+		if !GameOver.visible:
+			if !is_pause:
+				_on_pause_button_pressed() 
+			else:
+				_on_continue_pressed()
 
 
 func _on_exit_pressed() -> void:

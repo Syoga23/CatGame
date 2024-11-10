@@ -7,6 +7,7 @@ extends Node2D
 @export var steak : PackedScene
 @onready var conf1 = $Confetti
 @onready var conf2 = $Confetti2
+@onready var PM = %Party_Member
 
 var viewport_size
 
@@ -16,7 +17,7 @@ func _ready() -> void:
 	conf2.position.x = viewport_size.x
 	set_walls()
 	spawn_steaks(100)
-	#get_node("UI/Control").
+	PM.visible = false
 	conf1.emit()
 	conf2.emit()
 
@@ -51,5 +52,4 @@ func remove_all_balls():
 		ball.queue_free()  # Удаляем шар
 
 func _on_timer_timeout() -> void:
-	
-	pass
+	PM.visible = true

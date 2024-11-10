@@ -8,7 +8,7 @@ texture = ExtResource("2_fs5o2")
 
 [resource]
 default_font = ExtResource("1_y47aq")
-Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_outline_color = Color(0.223529, 0.223529, 0.223529, 0.498039)
 Button/constants/outline_size = 0
 Button/fonts/font = ExtResource("1_y47aq")
 Button/styles/focus = SubResource("StyleBoxTexture_5sper")
